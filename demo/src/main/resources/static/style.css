@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
+}
+
+.form{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min-content;
+    height: min-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 10px #2C854A;
+    padding: 3rem 2rem 3rem 2rem;
+}
+
+.title{
+    font-size: 1.8rem;
+    margin-bottom: 10%;
+}
+
+.input{
+    min-width: 280px;
+    border: 22px;
+    border-bottom: 1px solid #c9c9c9;
+    padding: 5px;
+    margin: 0px 0px 12px -5px;
+    margin: 0.5rem 0rem 2.5rem 0rem;
+}
+
+.input input{
+    width: 80%;
+    border: none;
+    outline: none;
+    transform: translateY(-10%);
+    margin-bottom: 0rem;
+}
+.register {
+    position: relative;
+    left: 25%;
+    font-size: 1.5rem;
+    margin-bottom: 4.5rem;
+    color: #000000;
+}
+
+.btn button{
+    font-size: large;
+    border: none;
+    border-radius: 25px;
+    height: 40px;
+    min-width: 280px;
+    color: white;
+    background-color: #2d7e48;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.btn button:hover{
+    background-color: #81d19d;
+    transition: all 0.2s ease;
+}
+
+label{
+    font-size: 1.2rem;
+    color: #72C28E;
+}
