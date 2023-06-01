@@ -4,11 +4,14 @@
  */
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class ControllerApplication {
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("")
     public String index() {
@@ -35,7 +41,18 @@ public class ControllerApplication {
 
     @PostMapping("/cadastro")
     public String cadastroUsuario(@ModelAttribute Usuario usuario, Model model) {
+//        Usuario user = new Usuario();
+//        user.setNome(usuario.getNome());
+//        user.setSenha(usuario.getSenha());
+        userRepository.save(usuario);
         model.addAttribute("usuario", usuario);
         return "boasvindas";
+    }
+
+    @GetMapping(path = "/all")
+    public @ResponseBody
+    Iterable<Usuario> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return userRepository.findAll();
     }
 }
