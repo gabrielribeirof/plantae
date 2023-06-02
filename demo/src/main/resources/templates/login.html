@@ -3,7 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
     <head>
         <title>Login</title>
         <meta charset="UTF-8">
@@ -11,5 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         <div>Login</div>
+        <span th:text="${usuario.nome}"></span>
+        <span th:text="${usuario.senha}"></span>
     </body>
 </html>

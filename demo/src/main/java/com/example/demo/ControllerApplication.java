@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -34,6 +36,14 @@ public class ControllerApplication {
         return "cadastro";
     }
 
+    @RequestMapping("/login/{id}")
+    public ModelAndView detalhesUsuario(@PathVariable("id") int id) {
+        Usuario usuario = userRepository.findById(id).get();
+        ModelAndView mv = new ModelAndView("login");
+        mv.addObject("usuario", usuario);
+        return mv;
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -41,9 +51,6 @@ public class ControllerApplication {
 
     @PostMapping("/cadastro")
     public String cadastroUsuario(@ModelAttribute Usuario usuario, Model model) {
-//        Usuario user = new Usuario();
-//        user.setNome(usuario.getNome());
-//        user.setSenha(usuario.getSenha());
         userRepository.save(usuario);
         model.addAttribute("usuario", usuario);
         return "boasvindas";
