@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Willian
  */
-//@Repository
+@Repository
 public interface UserRepository extends CrudRepository<Usuario, Integer> {
 
 }

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package com.example.demo;
 
+//import model.Plantas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,10 +37,17 @@ public class ControllerApplication {
         return "cadastro";
     }
 
-    @RequestMapping("/login/{id}")
+    @PostMapping("/cadastro")
+    public String cadastroUsuario(@ModelAttribute Usuario usuario, Model model) {
+        userRepository.save(usuario);
+        model.addAttribute("usuario", usuario);
+        return "boasvindas";
+    }
+
+    @RequestMapping("/id-usuario/{id}")
     public ModelAndView detalhesUsuario(@PathVariable("id") int id) {
         Usuario usuario = userRepository.findById(id).get();
-        ModelAndView mv = new ModelAndView("login");
+        ModelAndView mv = new ModelAndView("id-usuario");
         mv.addObject("usuario", usuario);
         return mv;
     }
@@ -54,11 +62,16 @@ public class ControllerApplication {
         return "plantas";
     }
 
-    @PostMapping("/cadastro")
-    public String cadastroUsuario(@ModelAttribute Usuario usuario, Model model) {
-        userRepository.save(usuario);
-        model.addAttribute("usuario", usuario);
-        return "boasvindas";
+    @GetMapping("/cadastro-plantas")
+    public String cadastroPlantas(Model model) {
+        model.addAttribute("plantas", new Plantas());
+        return "/cadastro-plantas";
+    }
+
+    @PostMapping("/cadastro-plantas")
+    public String cadastroPlantasPost(@ModelAttribute Plantas plantas, Model model) {
+        model.addAttribute("plantas", plantas);
+        return "sucesso-cadastro-plantas";
     }
 
     @GetMapping(path = "/all")
