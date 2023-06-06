@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.example.demo;
+package com.example.demo.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,12 +18,16 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Willian
  */
 @Entity
-public class Usuario implements UserDetails, Serializable {
+public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    
+    @NotEmpty
     private String nome;
+    
+    @NotEmpty
     private String senha;
 
     public Integer getId() {
