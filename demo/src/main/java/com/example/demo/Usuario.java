@@ -43,20 +43,20 @@ public class Usuario implements UserDetails, Serializable {
         this.nome = nome;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public void setUsername(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserName() {
-        return userName;
     }
 
     @Override
@@ -79,12 +79,6 @@ public class Usuario implements UserDetails, Serializable {
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public String getUsername() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
