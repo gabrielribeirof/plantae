@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Karol
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/plants")
 public class PlantController {
 
     @Autowired
