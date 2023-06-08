@@ -1,6 +1,6 @@
+package com.example.demo.plants;
 
-
-import com.example.demo.plants.Plant;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PlantRepository extends CrudRepository<Plant, Integer> {
-
-    Plant findByName(long id);
+    
+    Optional<Plant> findById(Long id);
+    
 }

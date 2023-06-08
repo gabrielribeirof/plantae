@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class Plant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @NotEmpty
     private String especie;
@@ -36,7 +37,7 @@ public class Plant implements Serializable {
     
     public Plant(){}
 
-    public Plant(long id, String especie, String category, int water, int sun, ArrayList<String> daysToWater) {
+    public Plant(int id, String especie, String category, int water, int sun, ArrayList<String> daysToWater) {
         this.id = id;
         this.especie = especie;
         this.category = category;
@@ -45,11 +46,11 @@ public class Plant implements Serializable {
         this.daysToWater = daysToWater;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
