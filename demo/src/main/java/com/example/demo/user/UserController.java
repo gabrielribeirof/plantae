@@ -1,56 +1,71 @@
 package com.example.demo.user;
 
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Karol
  */
-@Controller
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
-    
-    @GetMapping("/cadastro")
-    public String cadastro(Model model) {
-        model.addAttribute("usuario", new User());
-        return "cadastro";
+
+    @GetMapping
+    public List<User> findAll() {
+        return (List<User>) userRepository.findAll();
     }
 
-    @PostMapping("/cadastro")
-    public String cadastroUsuario(@ModelAttribute User usuario, Model model) {
-        userRepository.save(usuario);
-        model.addAttribute("usuario", usuario);
-        return "boasvindas";
+    @PostMapping
+    public ResponseEntity<User> newPlant(@RequestBody User user) {
+        User newUser = userRepository.save(user);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @RequestMapping("/id-usuario/{id}")
-    public ModelAndView detalhesUsuario(@PathVariable("id") int id) {
-        User usuario = userRepository.findById(id).get();
-        ModelAndView mv = new ModelAndView("id-usuario");
-        mv.addObject("usuario", usuario);
-        return mv;
+    @GetMapping("/{id}")
+    public ResponseEntity<User> buscarProdutoPorId(@PathVariable int id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.map(produto -> new ResponseEntity<>(produto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User bodyUser) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User newUser = userOptional.get();
+            newUser.setNome(bodyUser.getNome());
+            newUser.setSenha(bodyUser.getSenha());
+
+            User updatedUser = userRepository.save(newUser);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-   
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return userRepository.findAll();
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

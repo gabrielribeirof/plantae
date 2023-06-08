@@ -32,22 +32,22 @@ public class PlantController {
 
     @PostMapping
     public ResponseEntity<Plant> newPlant(@RequestBody Plant plant) {
-        Plant novoProduto = plantRepository.save(plant);
-        return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
+        Plant newPlant = plantRepository.save(plant);
+        return new ResponseEntity<>(newPlant, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Plant> buscarProdutoPorId(@PathVariable int id) {
-        Optional<Plant> produtoOptional = plantRepository.findById(id);
-        return produtoOptional.map(produto -> new ResponseEntity<>(produto, HttpStatus.OK))
+    public ResponseEntity<Plant> findById(@PathVariable int id) {
+        Optional<Plant> plantOptional = plantRepository.findById(id);
+        return plantOptional.map(produto -> new ResponseEntity<>(produto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Plant> updatePlant(@PathVariable int id, @RequestBody Plant bodyPlant) {
-        Optional<Plant> produtoOptional = plantRepository.findById(id);
-        if (produtoOptional.isPresent()) {
-            Plant newPlant = produtoOptional.get();
+        Optional<Plant> plantOptional = plantRepository.findById(id);
+        if (plantOptional.isPresent()) {
+            Plant newPlant = plantOptional.get();
             newPlant.setCategory(bodyPlant.getCategory());
             newPlant.setDaysToWater(bodyPlant.getDaysToWater());
             newPlant.setEspecie(bodyPlant.getEspecie());
@@ -62,7 +62,7 @@ public class PlantController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProduto(@PathVariable int id) {
+    public ResponseEntity<Void> deletePlant(@PathVariable int id) {
         Optional<Plant> plant = plantRepository.findById(id);
         if (plant.isPresent()) {
             plantRepository.deleteById(id);
