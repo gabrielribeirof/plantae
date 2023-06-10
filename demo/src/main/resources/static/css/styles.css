@@ -5,3 +5,33 @@ body {
 .teste{
     font-size: 20pt;
 }
+
+/* <head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="form">
+    <form action="">
+        <h2 class="register">Registre-se</h2>
+        <label for="name">Nome completo</label>
+        <div class="input">
+            <input type="text" name="name" class="name">
+        </div>
+        <label for="userName">Nome de usuário</label>
+        <div class="input">
+            <input type="text" name="userName" class="userName">
+        </div>
+        <label for="password">Senha</label>
+        <div class="input">
+            <input type="text" name="password" class="password">
+        </div>
+
+        <div class="btn">
+            <button type="submit">Confirmar</button>
+        </div>
+    </form>
+</div>
+</body> */
