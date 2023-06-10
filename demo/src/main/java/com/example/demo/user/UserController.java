@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> newPlant(@RequestBody User user) {
+    public ResponseEntity<User> newUser(@RequestBody User user) {
         User newUser = userRepository.save(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> buscarProdutoPorId(@PathVariable int id) {
+    public ResponseEntity<User> findById(@PathVariable int id) {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional.map(produto -> new ResponseEntity<>(produto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
