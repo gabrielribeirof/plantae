@@ -72,23 +72,28 @@ public class PlantController {
         }
     }
     
-    @GetMapping("/reports/total/week/{week}/{id}")
-    public ResponseEntity<Plant> totalOfWeek(@PathVariable int id, @PathVariable int week) {
+    @GetMapping("/reports/week/total-watered")
+    public ResponseEntity<Plant> totalOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    @GetMapping("/reports/total/{day}/{id}")
-    public ResponseEntity<Plant> totalOfDay(@PathVariable int id, @PathVariable String day) {
+    @GetMapping("/reports/week/less-watered")
+    public ResponseEntity<Plant> lessWateredOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    @GetMapping("/reports/max/{day}/{id}")
-    public ResponseEntity<Plant> maxOfDay(@PathVariable int id, @PathVariable String day) {
+    @GetMapping("/reports/week/most-watered")
+    public ResponseEntity<Plant> mostWateredOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    @GetMapping("/reports/min/{day}/{id}")
-    public ResponseEntity<Plant> minOfDay(@PathVariable int id, @PathVariable String day) {
+    @GetMapping("/reports/{day}/total-watered")
+    public ResponseEntity<Plant> wateredOfDay(@PathVariable String day) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @GetMapping("/reports/{day}/total-not-watered")
+    public ResponseEntity<Plant> notWateredOfDay(@PathVariable String day) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
