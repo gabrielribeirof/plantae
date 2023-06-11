@@ -71,4 +71,24 @@ public class PlantController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    @GetMapping("/reports/total/week/{week}/{id}")
+    public ResponseEntity<Plant> totalOfWeek(@PathVariable int id, @PathVariable int week) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @GetMapping("/reports/total/{day}/{id}")
+    public ResponseEntity<Plant> totalOfDay(@PathVariable int id, @PathVariable String day) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @GetMapping("/reports/max/{day}/{id}")
+    public ResponseEntity<Plant> maxOfDay(@PathVariable int id, @PathVariable String day) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @GetMapping("/reports/min/{day}/{id}")
+    public ResponseEntity<Plant> minOfDay(@PathVariable int id, @PathVariable String day) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

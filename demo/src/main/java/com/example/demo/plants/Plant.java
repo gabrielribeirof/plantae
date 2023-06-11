@@ -35,15 +35,27 @@ public class Plant implements Serializable {
     @NotEmpty
     private ArrayList<String> daysToWater;
     
+    @NotEmpty
+    private boolean watered; // check plant
+    
     public Plant(){}
 
-    public Plant(int id, String especie, String category, int water, int sun, ArrayList<String> daysToWater) {
+    public Plant(int id, String especie, String category, int water, int sun, ArrayList<String> daysToWater, boolean watered) {
         this.id = id;
         this.especie = especie;
         this.category = category;
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
+        this.watered = watered;
+    }
+
+    public boolean isWatered() {
+        return watered;
+    }
+
+    public void setWatered(boolean watered) {
+        this.watered = watered;
     }
 
     public int getId() {
