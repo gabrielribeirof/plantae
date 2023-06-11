@@ -44,7 +44,7 @@ body{
 }
 
 .input input{
-    width: 80%;
+    width: 100%;
     border: none;
     outline: none;
     transform: translateY(-10%);

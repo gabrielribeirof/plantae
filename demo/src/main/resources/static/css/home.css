@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+}
+
+header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  background: #264837;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.container {
+  color: #ffffff;
+}
+
+.week {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7.5vh;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  margin: 2rem 0rem 2rem 0rem;
+}
+
+.week-btn {
+  background-color: #daf3e1;
+  border: none;
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  margin: 0rem 0.5rem 0rem 0.5rem;
+  font-size: 1.25rem;
+  color: rgb(55, 55, 55);
+  width: 10rem;
+  font: bold;
+  cursor: pointer;
+}
+
+.week-btn:hover {
+  background: #264837;
+  color: rgb(55, 55, 55);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.content {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75.6vh;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0rem 5rem 0rem 5rem;
+  margin: 0;
+}
+
+.cards-container {
+  height: 70vh;
+  width: 50%;
+  display: inline-block;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  margin: 0rem;
+  background-color: #fcfcfc;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);
+  background-color: #e8e8e8;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  margin-block-end: 1rem;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.card-separator {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reminder {
+  height: 70vh;
+  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  margin: 0rem;
+  background-color: #fcfcfc;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+}
+
+.checkbox {
+  cursor: pointer;
+  appearance: none;
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  border: 3px solid #3e7a44;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  margin-right: 2rem;
+}
+
+.checkbox:before {
+  content: "";
+  width: 110%;
+  height: 110%;
+  background-color: #3e7a44;
+  border-radius: 50%;
+  border: 3px solid #8ecd57;
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+  position: absolute;
+}
+
+.card:has(input:checked) {
+  background-color: #94d85c;
+  transition: all 200ms ease-in-out;
+}
+/*   
+  .checkbox:before {
+    border-radius: 0;
+    background-color: #3E7A44;
+    border: 1px solid white;
+    border-left: 0;
+    border-top: 0;
+    width: 10px;
+    height: 25px;
+    transform: rotate(45deg);
+    top: 2px;
+  } */
+
+.checkbox:checked:before {
+  opacity: 1;
+}
+
+.checkbox:focus {
+  box-shadow: 0 0 5px #3e7a44;
+}
