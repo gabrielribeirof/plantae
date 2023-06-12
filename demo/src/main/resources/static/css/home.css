@@ -105,11 +105,41 @@ header {
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+.card{
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 .card-separator {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  align-self: self-end;
+}
+.plant-management{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.plant-management button{
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-left: 1rem;
+  border-radius: 50%;
+}
+
+.plant-management button:hover{
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.plant-management button svg{
+  height: 34px;
+  width: 34px;
 }
 
 .reminder {
@@ -140,7 +170,7 @@ header {
   align-items: center;
   justify-content: center;
   outline: none;
-  margin-right: 2rem;
+  margin: 0 2rem 0 1rem;
 }
 
 .checkbox:before {
@@ -166,18 +196,6 @@ header {
   background-size: 200% 100%;
   transition: all 200ms ease-out;
 }
-/*   
-  .checkbox:before {
-    border-radius: 0;
-    background-color: #3E7A44;
-    border: 1px solid white;
-    border-left: 0;
-    border-top: 0;
-    width: 10px;
-    height: 25px;
-    transform: rotate(45deg);
-    top: 2px;
-  } */
 
 .checkbox:checked:before {
   opacity: 1;
@@ -186,3 +204,4 @@ header {
 .checkbox:focus {
   box-shadow: 0 0 5px #3e7a44;
 }
+
