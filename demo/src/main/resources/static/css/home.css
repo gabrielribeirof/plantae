@@ -96,8 +96,8 @@ header {
 .content {
   position: relative;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 5%;
+  width: 90%;
   height: 75.6vh;
   background: #ffffff;
   display: flex;
@@ -170,19 +170,23 @@ header {
   height: 34px;
   width: 34px;
 }
-
+form {
+  width: 100%;
+  height: 100%;
+}
 .reminder {
   height: 70vh;
-  width: 30%;
+  width: 25%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   padding: 1rem;
   margin: 0rem;
   background-color: #fcfcfc;
   border: 1px solid #d3d3d3;
   border-radius: 16px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0);
 }
 
 .checkbox {
@@ -240,11 +244,11 @@ header {
 }
 
 .input{
-  min-width: 280px;
+  width: 100%;
   border: 22px;
   border-bottom: 1px solid #c9c9c9;
   padding: 5px;
-  margin: 0px 0px 12px -5px;
+  margin: 0px 0px 12px 0px;
   margin: 0.5rem 0rem 2.5rem 0rem;
 }
 
@@ -256,10 +260,9 @@ header {
   margin-bottom: 0rem;
 }
 .register {
-  position: relative;
-  left: 25%;
+  align-self: auto;
   font-size: 1.5rem;
-  margin-bottom: 4.5rem;
+  margin: 2.5rem;
   color: #000000;
 }
 
@@ -275,7 +278,7 @@ header {
   border: none;
   border-radius: 25px;
   height: 40px;
-  min-width: 280px;
+  width: 80%;
   color: white;
   background-color: #2d7e48;
   padding: 5px;
