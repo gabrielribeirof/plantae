@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package plantae.users;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

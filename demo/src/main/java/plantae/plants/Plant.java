@@ -1,5 +1,5 @@
 
-package com.example.demo.plants;
+package plantae.plants;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

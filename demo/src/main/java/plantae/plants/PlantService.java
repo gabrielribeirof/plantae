@@ -1,5 +1,5 @@
 
-package com.example.demo.plants;
+package plantae.plants;
 
 /**
  *

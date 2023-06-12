@@ -1,4 +1,4 @@
-package com.example.demo.plants;
+package plantae.plants;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,15 +25,20 @@ public class PlantController {
     @Autowired
     PlantRepository plantRepository;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Plant> findAll() {
         return (List<Plant>) plantRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<Plant> newPlant(@RequestBody Plant plant) {
         Plant newPlant = plantRepository.save(plant);
         return new ResponseEntity<>(newPlant, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/cadastrar")
+    public String cadastrar() {
+        return "cadastro-plantas";
     }
 
     @GetMapping("/{id}")
@@ -71,27 +76,27 @@ public class PlantController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
     @GetMapping("/reports/week/total-watered")
     public ResponseEntity<Plant> totalOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @GetMapping("/reports/week/less-watered")
     public ResponseEntity<Plant> lessWateredOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @GetMapping("/reports/week/most-watered")
     public ResponseEntity<Plant> mostWateredOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @GetMapping("/reports/{day}/total-watered")
     public ResponseEntity<Plant> wateredOfDay(@PathVariable String day) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @GetMapping("/reports/{day}/total-not-watered")
     public ResponseEntity<Plant> notWateredOfDay(@PathVariable String day) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

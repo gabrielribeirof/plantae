@@ -1,4 +1,4 @@
-package com.example.demo.plants;
+package plantae.plants;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package plantae.users;
 
 import java.util.List;
 import java.util.Optional;

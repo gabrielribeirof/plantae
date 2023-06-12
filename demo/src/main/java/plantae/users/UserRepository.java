@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package plantae.users;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
