@@ -27,7 +27,12 @@ public class User implements UserDetails, Serializable {
     
     @NotEmpty
     private String senha;
+
+    @NotEmpty
     private String userName;
+
+    @OneToMany(mappedBy="user")
+    private Set<Plant> plants;
 
     public Integer getId() {
         return id;
