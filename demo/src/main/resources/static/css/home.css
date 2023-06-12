@@ -29,6 +29,12 @@ header {
 .container {
   color: #ffffff;
 }
+.container button{
+  color: #ffffff;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 
 .week {
   position: relative;
