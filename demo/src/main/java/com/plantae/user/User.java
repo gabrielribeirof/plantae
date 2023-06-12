@@ -1,4 +1,8 @@
-package plantae.users;
+/*
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
+ */
+package com.plantae.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

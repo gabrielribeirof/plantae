@@ -1,8 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
  */
-package plantae.config;
+package com.plantae.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/cadastro").permitAll()
+                .requestMatchers("/", "/cadastro", "/css/**").permitAll()
                 .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -40,15 +40,5 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails usuario
-//                = User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("password")
-//                        .roles("aaaaaa")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(usuario);
-//    }
+
 }

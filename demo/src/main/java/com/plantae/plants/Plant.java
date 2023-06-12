@@ -1,5 +1,8 @@
-
-package plantae.plants;
+/*
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
+ */
+package com.plantae.plants;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,23 +25,24 @@ public class Plant implements Serializable {
 
     @NotEmpty
     private String especie;
-    
+
     @NotEmpty
     private String category;
-    
+
     @NotEmpty
-    private int water; // storage with 1, 2 or 3  
-    
+    private int water; // storage with 1, 2 or 3
+
     @NotEmpty
     private int sun; // storage with 1, 2 or 3
-    
+
     @NotEmpty
     private ArrayList<String> daysToWater;
-    
+
     @NotEmpty
     private boolean watered; // check plant
-    
-    public Plant(){}
+
+    public Plant() {
+    }
 
     public Plant(int id, String especie, String category, int water, int sun, ArrayList<String> daysToWater, boolean watered) {
         this.id = id;

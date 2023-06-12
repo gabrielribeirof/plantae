@@ -1,14 +1,13 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
  */
-package plantae.controller;
+package com.plantae.controller;
 
-import plantae.users.User;
-import plantae.users.UserRepository;
+import com.plantae.user.User;
+import com.plantae.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,14 +24,6 @@ public class Controlador {
 
     @Autowired
     UserRepository userRepository;
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-////        registry.addViewController("/home").setViewName("index");;
-////        registry.addViewController("/").setViewName("index");
-////        registry.addViewController("/login").setViewName("login");
-////        registry.addViewController("/cadastro").setViewName("cadastro");
-//
-//    }
 
     @GetMapping("/")
     public String home() {
@@ -69,7 +60,7 @@ public class Controlador {
     }
 
     @GetMapping("/plantas")
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     public String plantas() {
         return "plantas";
     }

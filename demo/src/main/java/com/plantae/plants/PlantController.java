@@ -1,4 +1,8 @@
-package plantae.plants;
+/*
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
+ */
+package com.plantae.plants;
 
 import java.util.List;
 import java.util.Optional;
