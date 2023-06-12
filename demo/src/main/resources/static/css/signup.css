@@ -79,27 +79,3 @@ label{
     font-size: 1.2rem;
     color: #72C28E;
 }
-
-/* <body>
-        <div class="form">
-            <form action="">
-                <h2 class="register">Registre-se</h2>
-                <label for="name">Nome completo</label>
-                <div class="input">
-                    <input type="text" name="name" class="name">
-                </div>
-                <label for="userName">Nome de usuário</label>
-                <div class="input">
-                    <input type="text" name="userName" class="userName">
-                </div>
-                <label for="password">Senha</label>
-                <div class="input">
-                    <input type="text" name="password" class="password">
-                </div>
-
-                <div class="btn">
-                    <button type="submit">Confirmar</button>
-                </div>
-            </form>
-        </div>
-    </body> */

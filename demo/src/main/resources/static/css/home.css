@@ -36,7 +36,7 @@ header {
   cursor: pointer;
 }
 
-.week {
+.week, .week-days {
   position: relative;
   top: 0;
   left: 0;
@@ -48,6 +48,29 @@ header {
   align-items: center;
   padding: 1rem;
   margin: 2rem 0rem 2rem 0rem;
+}
+.week-days {
+  background: #F4F4F4;
+  padding: 0.5rem;
+  border-radius: 15px;
+}
+
+.my-button{
+  font-size: large;
+  padding: 0.2rem;
+  margin: 0rem 0.3rem 0rem 0.3rem;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  background: #979797;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.my-button.active {
+  background-color: #67E074;
+  transition: all 0.2s ease;
 }
 
 .week-btn {
@@ -98,7 +121,7 @@ header {
   border-radius: 16px;
 }
 
-.card {
+.card, .reminder {
   border-radius: 10px;
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);
   background-color: #e8e8e8;
@@ -211,3 +234,60 @@ header {
   box-shadow: 0 0 5px #3e7a44;
 }
 
+.title{
+  font-size: 1.8rem;
+  margin-bottom: 10%;
+}
+
+.input{
+  min-width: 280px;
+  border: 22px;
+  border-bottom: 1px solid #c9c9c9;
+  padding: 5px;
+  margin: 0px 0px 12px -5px;
+  margin: 0.5rem 0rem 2.5rem 0rem;
+}
+
+.input input{
+  width: 100%;
+  border: none;
+  outline: none;
+  transform: translateY(-10%);
+  margin-bottom: 0rem;
+}
+.register {
+  position: relative;
+  left: 25%;
+  font-size: 1.5rem;
+  margin-bottom: 4.5rem;
+  color: #000000;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn button{
+  font-size: large;
+  border: none;
+  border-radius: 25px;
+  height: 40px;
+  min-width: 280px;
+  color: white;
+  background-color: #2d7e48;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.btn button:hover{
+  background-color: #81d19d;
+  transition: all 0.2s ease;
+}
+
+label{
+  font-size: 1.2rem;
+  color: #72C28E;
+}
