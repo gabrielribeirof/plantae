@@ -156,8 +156,15 @@ header {
 }
 
 .card:has(input:checked) {
-  background-color: #94d85c;
-  transition: all 200ms ease-in-out;
+  background: linear-gradient(to left, #94d85c 50%, #e8e8e8 50%) right;
+  background-size: 200% 100%;
+  transition: all 200ms ease-out;
+}
+
+.card:not(:has(input:checked)) {
+  background: linear-gradient(to right, #e8e8e8 50%, #94d85c 50%) left;
+  background-size: 200% 100%;
+  transition: all 200ms ease-out;
 }
 /*   
   .checkbox:before {
