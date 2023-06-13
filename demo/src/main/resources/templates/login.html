@@ -13,7 +13,8 @@
     </div>
     <div class="popup" th:if="${param.logout}">
       <span class="popup-message">You have been logged out.</span>
-    </div><div class="form">
+    </div>
+    <div class="form">
       <form th:action="@{/login}" method="post">
         <h2 class="login">Login</h2>
         <label for="">Nome de usuário</label>
@@ -25,13 +26,14 @@
           <input type="password" name="password" id="" />
         </div>
         <div class="btn">
-          <button type="submit" value="submit">Confirmar</button>
+          <button type="submit" value="submit">Entrar</button>
         </form>
- 
-        <form th:action="@{/logout}" method="post" class="logout">
+        <div class="btn"><form action="/cadastro">
+          <button type="submit">Cadastrar-se</button>
+      </form></div>
+        <!-- <form th:action="@{/logout}" method="post" class="logout">
           <input type="submit" value="Sign Out" />
-        </form>
-
+        </form> -->
       </div>
     </div>
   </body>

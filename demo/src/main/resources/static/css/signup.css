@@ -1,115 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
+body {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
 }
 .popup {
-    position: fixed;
-    top: 10%;
-    left: 42.5%;
-    width: 15%;
-    border-radius: 30px;
-    background-color: #f37d72; /* Red background color */
-    color: #fff; /* White text color */
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .popup-message {
-    display: inline-block;
-  }
-  
-  /* Center the popup horizontally */
-  .popup::before {
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 100%;
-    vertical-align: middle;
-  }
-  
-  .popup-message {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-.form{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min-content;
-    height: min-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 5px 5px 10px #2C854A;
-    padding: 3rem 2rem 2rem 2rem;
+  position: fixed;
+  top: 10%;
+  left: 42.5%;
+  width: 15%;
+  border-radius: 30px;
+  background-color: #f37d72; /* Red background color */
+  color: #fff; /* White text color */
+  text-align: center;
+  padding: 10px;
 }
 
-.title{
-    font-size: 1.8rem;
-    margin-bottom: 10%;
+.popup-message {
+  display: inline-block;
 }
 
-.input{
-    min-width: 280px;
-    border: 22px;
-    border-bottom: 1px solid #c9c9c9;
-    padding: 5px;
-    margin: 0px 0px 12px -5px;
-    margin: 0.5rem 0rem 2.5rem 0rem;
+/* Center the popup horizontally */
+.popup::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
 }
 
-.input input{
-    width: 100%;
-    border: none;
-    outline: none;
-    transform: translateY(-10%);
-    margin-bottom: 0rem;
+.popup-message {
+  display: inline-block;
+  vertical-align: middle;
 }
-.register, .login {
-    position: relative;
-    left: 25%;
-    font-size: 1.5rem;
-    margin-bottom: 4.5rem;
-    color: #000000;
+
+.form {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min-content;
+  height: min-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 10px #2c854a;
+  padding: 3rem 2rem 2rem 2rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 10%;
+}
+
+.input {
+  min-width: 280px;
+  border: 22px;
+  border-bottom: 1px solid #c9c9c9;
+  padding: 5px;
+  margin: 0px 0px 12px -5px;
+  margin: 0.5rem 0rem 2.5rem 0rem;
+}
+
+.input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  transform: translateY(-10%);
+  margin-bottom: 0rem;
+}
+.register,
+.login {
+  position: relative;
+  left: 25%;
+  font-size: 1.5rem;
+  margin-bottom: 4.5rem;
+  color: #000000;
 }
 
 .login {
-    position: relative;
-    left: 35%;
+  position: relative;
+  left: 35%;
 }
-.btn button, .logout input{
-    font-size: large;
-    border: none;
-    border-radius: 25px;
-    height: 40px;
-    min-width: 280px;
-    color: white;
-    background-color: #2d7e48;
-    padding: 5px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-}
-
-.btn button:hover, .logout input:hover{
-    background-color: #81d19d;
-    transition: all 0.2s ease;
+.btn button,
+.logout input {
+  font-size: large;
+  border: none;
+  border-radius: 25px;
+  height: 40px;
+  min-width: 280px;
+  color: white;
+  background-color: #2d7e48;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }
 
-label{
-    font-size: 1.2rem;
-    color: #72C28E;
+.btn button:hover,
+.logout input:hover {
+  background-color: #81d19d;
+  transition: all 0.2s ease;
+}
+
+label {
+  font-size: 1.2rem;
+  color: #72c28e;
 }

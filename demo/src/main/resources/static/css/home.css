@@ -29,14 +29,15 @@ header {
 .container {
   color: #ffffff;
 }
-.container button{
+.container button {
   color: #ffffff;
   border: none;
   background: transparent;
   cursor: pointer;
 }
 
-.week, .week-days {
+.week,
+.week-days {
   position: relative;
   top: 0;
   left: 0;
@@ -50,12 +51,12 @@ header {
   margin: 2rem 0rem 2rem 0rem;
 }
 .week-days {
-  background: #F4F4F4;
+  background: #f4f4f4;
   padding: 0.5rem;
   border-radius: 15px;
 }
 
-.my-button{
+.my-button {
   font-size: large;
   padding: 0.2rem;
   margin: 0rem 0.3rem 0rem 0.3rem;
@@ -69,7 +70,7 @@ header {
 }
 
 .my-button.active {
-  background-color: #67E074;
+  background-color: #67e074;
   transition: all 0.2s ease;
 }
 
@@ -121,7 +122,8 @@ header {
   border-radius: 16px;
 }
 
-.card, .reminder {
+.card,
+.reminder {
   border-radius: 10px;
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);
   background-color: #e8e8e8;
@@ -134,7 +136,7 @@ header {
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.card{
+.card {
   border: none;
   background: transparent;
   cursor: pointer;
@@ -147,13 +149,13 @@ header {
   align-items: center;
   align-self: self-end;
 }
-.plant-management{
+.plant-management {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
 }
-.plant-management button{
+.plant-management button {
   border: none;
   background: transparent;
   cursor: pointer;
@@ -161,12 +163,12 @@ header {
   border-radius: 50%;
 }
 
-.plant-management button:hover{
+.plant-management button:hover {
   background: white;
   transition: all 0.2s ease;
 }
 
-.plant-management button svg{
+.plant-management button svg {
   height: 34px;
   width: 34px;
 }
@@ -238,12 +240,12 @@ form {
   box-shadow: 0 0 5px #3e7a44;
 }
 
-.title{
+.title {
   font-size: 1.8rem;
   margin-bottom: 10%;
 }
 
-.input{
+.input {
   width: 100%;
   border: 22px;
   border-bottom: 1px solid #c9c9c9;
@@ -252,7 +254,7 @@ form {
   margin: 0.5rem 0rem 2.5rem 0rem;
 }
 
-.input input{
+.input input {
   width: 100%;
   border: none;
   outline: none;
@@ -273,7 +275,7 @@ form {
   align-items: center;
 }
 
-.btn button{
+.btn button {
   font-size: large;
   border: none;
   border-radius: 25px;
@@ -285,12 +287,12 @@ form {
   cursor: pointer;
 }
 
-.btn button:hover{
+.btn button:hover {
   background-color: #81d19d;
   transition: all 0.2s ease;
 }
 
-label{
+label {
   font-size: 1.2rem;
-  color: #72C28E;
+  color: #72c28e;
 }
