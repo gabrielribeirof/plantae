@@ -12,6 +12,35 @@ body{
     height: 100vh;
     background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
 }
+.popup {
+    position: fixed;
+    top: 10%;
+    left: 42.5%;
+    width: 15%;
+    border-radius: 30px;
+    background-color: #f37d72; /* Red background color */
+    color: #fff; /* White text color */
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .popup-message {
+    display: inline-block;
+  }
+  
+  /* Center the popup horizontally */
+  .popup::before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+  
+  .popup-message {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
 .form{
     position: relative;
@@ -26,7 +55,7 @@ body{
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     box-shadow: 5px 5px 10px #2C854A;
-    padding: 3rem 2rem 3rem 2rem;
+    padding: 3rem 2rem 2rem 2rem;
 }
 
 .title{
@@ -50,7 +79,7 @@ body{
     transform: translateY(-10%);
     margin-bottom: 0rem;
 }
-.register {
+.register, .login {
     position: relative;
     left: 25%;
     font-size: 1.5rem;
@@ -58,7 +87,11 @@ body{
     color: #000000;
 }
 
-.btn button{
+.login {
+    position: relative;
+    left: 35%;
+}
+.btn button, .logout input{
     font-size: large;
     border: none;
     border-radius: 25px;
@@ -68,9 +101,10 @@ body{
     background-color: #2d7e48;
     padding: 5px;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 
-.btn button:hover{
+.btn button:hover, .logout input:hover{
     background-color: #81d19d;
     transition: all 0.2s ease;
 }
