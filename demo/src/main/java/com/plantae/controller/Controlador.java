@@ -41,16 +41,16 @@ public class Controlador {
         return "cadastro";
     }
 
-//    @PostMapping("/cadastro")
-//    public String cadastroUsuario(@ModelAttribute User user, Model model) {
-//        model.addAttribute("usuario", user);
-//        return "cadastro";
-//    }
+    // @PostMapping("/cadastro")
+    // public String cadastroUsuario(@ModelAttribute User user, Model model) {
+    // model.addAttribute("usuario", user);
+    // return "cadastro";
+    // }
     @PostMapping("/cadastro")
     public String cadastroUsuario(@ModelAttribute User usuario, Model model) {
-//        Usuario user = new Usuario();
-//        user.setNome(usuario.getNome());
-//        user.setSenha(usuario.getSenha());
+        // Usuario user = new Usuario();
+        // user.setNome(usuario.getNome());
+        // user.setSenha(usuario.getSenha());
         BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
 
         usuario.setSenha(passwordencoder.encode(usuario.getPassword()));
@@ -60,7 +60,7 @@ public class Controlador {
     }
 
     @GetMapping("/plantas")
-//    @PreAuthorize("isAuthenticated()")
+    // @PreAuthorize("isAuthenticated()")
     public String plantas() {
         return "plantas";
     }
