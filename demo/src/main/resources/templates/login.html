@@ -4,24 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/signup.css"/>
     <title>Document</title>
   </head>
   <body>
-    <div th:if="${param.error}">Invalid username and password.</div>
-    <div th:if="${param.logout}">You have been logged out.</div>
-    <form th:action="@{/login}" method="post">
-      <div>
-        <input type="text" name="username"/>
+    <div class="popup" th:if="${param.error}">
+      <span class="popup-message">Invalid username and password.</span>
+    </div>
+    <div class="popup" th:if="${param.logout}">
+      <span class="popup-message">You have been logged out.</span>
+    </div><div class="form">
+      <form th:action="@{/login}" method="post">
+        <h2 class="login">Login</h2>
         <label for="">Nome de usuário</label>
-      </div>
-      <div>
-        <input type="password" name="password" id="" />
+        <div class="input">
+          <input type="text" name="username" />
+        </div>
         <label for="">Senha</label>
+        <div class="input">
+          <input type="password" name="password" id="" />
+        </div>
+        <div class="btn">
+          <button type="submit" value="submit">Confirmar</button>
+        </form>
+ 
+        <form th:action="@{/logout}" method="post" class="logout">
+          <input type="submit" value="Sign Out" />
+        </form>
+
       </div>
-      <button value="submit">Login</button>
-    </form>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+    </div>
   </body>
 </html>
