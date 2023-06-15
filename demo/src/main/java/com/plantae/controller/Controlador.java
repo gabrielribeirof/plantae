@@ -64,7 +64,7 @@ public class Controlador {
         usuario.setSenha(passwordencoder.encode(usuario.getPassword()));
         userRepository.save(usuario);
         model.addAttribute("usuario", usuario);
-        return "plantas";
+        return "login";
     }
 
     @GetMapping("/plantas")
