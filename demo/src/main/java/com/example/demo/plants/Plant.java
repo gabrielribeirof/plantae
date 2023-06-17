@@ -1,13 +1,18 @@
 
 package com.example.demo.plants;
 
+import com.example.demo.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  *
@@ -34,6 +39,11 @@ public class Plant implements Serializable {
     
     @NotEmpty
     private boolean[] daysToWater = new boolean[7];
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JsonIgnoreProperties("plant")
+    private User user;
     
     public Plant(){}
 
@@ -92,5 +102,9 @@ public class Plant implements Serializable {
 
     public void setDaysToWater(boolean[] daysToWater) {
         this.daysToWater = daysToWater;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

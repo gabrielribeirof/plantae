@@ -71,29 +71,48 @@ public class PlantController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
-    @GetMapping("/reports/week/total-watered")
-    public ResponseEntity<Plant> totalOfWeek() {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    // REPORTS *****************************************************************
+    @GetMapping("/{userid}/reports/week/total-watered")
+    public ResponseEntity<Integer> totalOfWeek(@PathVariable int userid) {
+        return new ResponseEntity(0, HttpStatus.OK);
     }
-    
+
     @GetMapping("/reports/week/less-watered")
     public ResponseEntity<Plant> lessWateredOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @GetMapping("/reports/week/most-watered")
     public ResponseEntity<Plant> mostWateredOfWeek() {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
-    @GetMapping("/reports/{day}/total-watered")
-    public ResponseEntity<Plant> wateredOfDay(@PathVariable String day) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    @GetMapping("/{userid}/reports/{day}/total-watered")
+    public ResponseEntity<Integer> wateredOfDay(@PathVariable int day, @PathVariable int userid) {
+        int total = 0;
+        Iterable<Plant> plants = (List<Plant>)plantRepository.findAll();
+        
+        for(Plant plant: plants){
+            if(plant.getDaysToWater()[day] == true){
+                total++;
+            }
+        }
+        
+        return new ResponseEntity<>(total, HttpStatus.OK);
     }
-    
-    @GetMapping("/reports/{day}/total-not-watered")
-    public ResponseEntity<Plant> notWateredOfDay(@PathVariable String day) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    @GetMapping("/{userid}/reports/{day}/total-not-watered")
+    public ResponseEntity<Integer> notWateredOfDay(@PathVariable int day, @PathVariable int userid) {
+        int total = 0;
+        Iterable<Plant> plants = (List<Plant>)plantRepository.findAll();
+        
+        for(Plant plant: plants){
+            if(plant.getDaysToWater()[day] == false){
+                total++;
+            }
+        }
+        
+        return new ResponseEntity<>(total, HttpStatus.OK);
     }
 }
