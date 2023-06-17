@@ -1,5 +1,8 @@
 package com.example.demo.plants;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,44 +78,96 @@ public class PlantController {
     // REPORTS *****************************************************************
     @GetMapping("/{userid}/reports/week/total-watered")
     public ResponseEntity<Integer> totalOfWeek(@PathVariable int userid) {
-        return new ResponseEntity(0, HttpStatus.OK);
+        int total = 0;
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+
+        for (Plant plant : plants) {
+            boolean[] daysToWater = plant.getDaysToWater();
+            boolean plantWatered = false;
+            for (boolean watered : daysToWater) {
+                if (watered == true) {
+                    total++;
+                    plantWatered = true;
+                    break;
+                }
+            }
+            if (plantWatered) {
+                break;
+            }
+        }
+
+        return new ResponseEntity(total, HttpStatus.OK);
     }
 
-    @GetMapping("/reports/week/less-watered")
+    @GetMapping("/{userid}/reports/week/less-watered")
     public ResponseEntity<Plant> lessWateredOfWeek() {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+        HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
+
+        for (Plant plant : plants) {
+            int total = 0;
+            boolean[] daysToWater = plant.getDaysToWater();
+            for (boolean watered : daysToWater) {
+                if (watered == true) {
+                    total++;
+                }
+            }
+            countWateredPlants.put(total, plant);
+        }
+
+        List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
+        Collections.sort(keys);
+        
+        return new ResponseEntity(countWateredPlants.get(keys.get(0)), HttpStatus.OK);
     }
 
-    @GetMapping("/reports/week/most-watered")
+    @GetMapping("/{userid}/reports/week/most-watered")
     public ResponseEntity<Plant> mostWateredOfWeek() {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+        HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
+
+        for (Plant plant : plants) {
+            int total = 0;
+            boolean[] daysToWater = plant.getDaysToWater();
+            for (boolean watered : daysToWater) {
+                if (watered == true) {
+                    total++;
+                }
+            }
+            countWateredPlants.put(total, plant);
+        }
+
+        List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
+        Collections.sort(keys);
+        
+        return new ResponseEntity(countWateredPlants.get(keys.get(keys.size())), HttpStatus.OK);
     }
 
     @GetMapping("/{userid}/reports/{day}/total-watered")
     public ResponseEntity<Integer> wateredOfDay(@PathVariable int day, @PathVariable int userid) {
         int total = 0;
-        Iterable<Plant> plants = (List<Plant>)plantRepository.findAll();
-        
-        for(Plant plant: plants){
-            if(plant.getDaysToWater()[day] == true){
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+
+        for (Plant plant : plants) {
+            if (plant.getDaysToWater()[day] == true) {
                 total++;
             }
         }
-        
+
         return new ResponseEntity<>(total, HttpStatus.OK);
     }
 
     @GetMapping("/{userid}/reports/{day}/total-not-watered")
     public ResponseEntity<Integer> notWateredOfDay(@PathVariable int day, @PathVariable int userid) {
         int total = 0;
-        Iterable<Plant> plants = (List<Plant>)plantRepository.findAll();
-        
-        for(Plant plant: plants){
-            if(plant.getDaysToWater()[day] == false){
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+
+        for (Plant plant : plants) {
+            if (plant.getDaysToWater()[day] == false) {
                 total++;
             }
         }
-        
+
         return new ResponseEntity<>(total, HttpStatus.OK);
     }
 }
