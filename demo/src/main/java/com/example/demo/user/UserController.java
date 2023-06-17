@@ -1,6 +1,5 @@
 package com.example.demo.user;
 
-import com.example.demo.plants.Plant;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements UserServices {
 
     @Autowired
     UserRepository userRepository;
