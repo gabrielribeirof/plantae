@@ -1,13 +1,16 @@
 
 package com.example.demo.user;
 
+import com.example.demo.plants.Plant;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -70,6 +73,14 @@ public class User implements UserDetails, Serializable {
     public boolean isEnabled() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Set<Plant> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(Set<Plant> plants) {
+        this.plants = plants;
     }
 
     @Override

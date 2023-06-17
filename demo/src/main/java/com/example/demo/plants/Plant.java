@@ -33,29 +33,17 @@ public class Plant implements Serializable {
     private int sun; // storage with 1, 2 or 3
     
     @NotEmpty
-    private ArrayList<String> daysToWater;
-    
-    @NotEmpty
-    private boolean watered; // check plant
+    private boolean[] daysToWater = new boolean[7];
     
     public Plant(){}
 
-    public Plant(int id, String especie, String category, int water, int sun, ArrayList<String> daysToWater, boolean watered) {
+    public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater) {
         this.id = id;
         this.especie = especie;
         this.category = category;
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
-        this.watered = watered;
-    }
-
-    public boolean isWatered() {
-        return watered;
-    }
-
-    public void setWatered(boolean watered) {
-        this.watered = watered;
     }
 
     public int getId() {
@@ -98,11 +86,11 @@ public class Plant implements Serializable {
         this.sun = sun;
     }
 
-    public ArrayList<String> getDaysToWater() {
+    public boolean[] getDaysToWater() {
         return daysToWater;
     }
 
-    public void setDaysToWater(ArrayList<String> daysToWater) {
+    public void setDaysToWater(boolean[] daysToWater) {
         this.daysToWater = daysToWater;
     }
 }
