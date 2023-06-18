@@ -41,7 +41,7 @@ public class Plant implements Serializable {
     private boolean[] daysToWater = new boolean[7];
     
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     @JsonIgnoreProperties("plant")
     private User user;
     
