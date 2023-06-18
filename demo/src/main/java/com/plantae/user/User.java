@@ -39,64 +39,120 @@ public class User implements UserDetails, Serializable {
     private String senha;
     private String username;
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSenha() {
         return senha;
     }
 
+    /**
+     *
+     * @param senha
+     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEnabled() {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getPassword() {
         return this.senha;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> auths = new java.util.ArrayList<SimpleGrantedAuthority>();

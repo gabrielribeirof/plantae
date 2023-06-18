@@ -39,6 +39,11 @@ public class UserController implements UserServices {
         return (List<User>) userRepository.findAll();
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     @PostMapping
     @Override
     public ResponseEntity<User> newUser(@RequestBody User user) {
@@ -50,6 +55,11 @@ public class UserController implements UserServices {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<User> findById(@PathVariable int id) {
@@ -58,6 +68,12 @@ public class UserController implements UserServices {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /**
+     *
+     * @param id
+     * @param bodyUser
+     * @return
+     */
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User bodyUser) {
@@ -74,6 +90,11 @@ public class UserController implements UserServices {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {

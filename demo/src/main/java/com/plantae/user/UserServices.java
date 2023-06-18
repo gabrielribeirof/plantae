@@ -12,13 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 public interface UserServices {
 
+    /**
+     *
+     * @return
+     */
     public List<User> findAll();
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public ResponseEntity<User> newUser(@RequestBody User user);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public ResponseEntity<User> findById(@PathVariable int id);
 
+    /**
+     *
+     * @param id
+     * @param bodyUser
+     * @return
+     */
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User bodyUser);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public ResponseEntity<Void> deleteUser(@PathVariable int id);
 }

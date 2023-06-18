@@ -15,6 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlantRepository extends CrudRepository<Plant, Integer> {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Optional<Plant> findById(int id);
-    
+
 }

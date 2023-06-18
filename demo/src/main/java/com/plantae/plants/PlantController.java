@@ -34,12 +34,21 @@ public class PlantController implements PlantServices {
     @Autowired
     PlantRepository plantRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/all")
     @Override
     public List<Plant> findAll() {
         return (List<Plant>) plantRepository.findAll();
     }
 
+    /**
+     *
+     * @param plant
+     * @return
+     */
     @PostMapping
     @Override
     public ResponseEntity<Plant> newPlant(@RequestBody Plant plant) {
@@ -47,6 +56,11 @@ public class PlantController implements PlantServices {
         return new ResponseEntity<>(newPlant, HttpStatus.CREATED);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<Plant> findById(@PathVariable int id) {
@@ -55,6 +69,12 @@ public class PlantController implements PlantServices {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /**
+     *
+     * @param id
+     * @param bodyPlant
+     * @return
+     */
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<Plant> updatePlant(@PathVariable int id, @RequestBody Plant bodyPlant) {
@@ -73,6 +93,11 @@ public class PlantController implements PlantServices {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Void> deletePlant(@PathVariable int id) {
@@ -86,6 +111,12 @@ public class PlantController implements PlantServices {
     }
 
     // REPORTS *****************************************************************
+
+    /**
+     *
+     * @param userid
+     * @return
+     */
     @GetMapping("/{userid}/reports/week/total-watered")
     @Override
     public ResponseEntity<Integer> totalOfWeek(@PathVariable int userid) {
@@ -110,6 +141,10 @@ public class PlantController implements PlantServices {
         return new ResponseEntity(total, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/{userid}/reports/week/less-watered")
     @Override
     public ResponseEntity<Plant> lessWateredOfWeek() {
@@ -133,6 +168,10 @@ public class PlantController implements PlantServices {
         return new ResponseEntity(countWateredPlants.get(keys.get(0)), HttpStatus.OK);
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/{userid}/reports/week/most-watered")
     @Override
     public ResponseEntity<Plant> mostWateredOfWeek() {
@@ -156,6 +195,12 @@ public class PlantController implements PlantServices {
         return new ResponseEntity(countWateredPlants.get(keys.get(keys.size())), HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param day
+     * @param userid
+     * @return
+     */
     @GetMapping("/{userid}/reports/{day}/total-watered")
     @Override
     public ResponseEntity<Integer> wateredOfDay(@PathVariable int day, @PathVariable int userid) {
@@ -171,6 +216,12 @@ public class PlantController implements PlantServices {
         return new ResponseEntity<>(total, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param day
+     * @param userid
+     * @return
+     */
     @GetMapping("/{userid}/reports/{day}/total-not-watered")
     @Override
     public ResponseEntity<Integer> notWateredOfDay(@PathVariable int day, @PathVariable int userid) {

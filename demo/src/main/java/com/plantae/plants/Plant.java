@@ -48,9 +48,21 @@ public class Plant implements Serializable {
     @JsonIgnoreProperties("plant")
     private User user;
 
+    /**
+     *
+     */
     public Plant() {
     }
 
+    /**
+     *
+     * @param id
+     * @param especie
+     * @param category
+     * @param water
+     * @param sun
+     * @param daysToWater
+     */
     public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater) {
         this.id = id;
         this.especie = especie;
@@ -60,54 +72,106 @@ public class Plant implements Serializable {
         this.daysToWater = daysToWater;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEspecie() {
         return especie;
     }
 
+    /**
+     *
+     * @param especie
+     */
     public void setEspecie(String especie) {
         this.especie = especie;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     *
+     * @param category
+     */
     public void setCategory(String category) {
         this.category = category;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getWater() {
         return water;
     }
 
+    /**
+     *
+     * @param water
+     */
     public void setWater(int water) {
         this.water = water;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSun() {
         return sun;
     }
 
+    /**
+     *
+     * @param sun
+     */
     public void setSun(int sun) {
         this.sun = sun;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean[] getDaysToWater() {
         return daysToWater;
     }
 
+    /**
+     *
+     * @param daysToWater
+     */
     public void setDaysToWater(boolean[] daysToWater) {
         this.daysToWater = daysToWater;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }

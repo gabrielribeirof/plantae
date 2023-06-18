@@ -32,6 +32,10 @@ public class Controlador {
     @Autowired
     PlantRepository plantRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/")
     public String home() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,17 +47,32 @@ public class Controlador {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/cadastro")
     public String cadastro(Model model) {
         model.addAttribute("usuario", new User());
         return "cadastro";
     }
 
+    /**
+     *
+     * @param usuario
+     * @param model
+     * @return
+     */
     @PostMapping("/cadastro")
     public String cadastroUsuario(@ModelAttribute User usuario, Model model) {
         BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
@@ -62,6 +81,11 @@ public class Controlador {
         return "login";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/cadastro-plantas")
     public ModelAndView plantas(Model model) {
         ModelAndView mv = new ModelAndView("plantas");
@@ -71,6 +95,12 @@ public class Controlador {
         return mv;
     }
 
+    /**
+     *
+     * @param plant
+     * @param model
+     * @return
+     */
     @PostMapping("/cadastro-plantas")
     public ModelAndView plantas(@ModelAttribute Plant plant, Model model) {
         model.addAttribute("plant", plant);
