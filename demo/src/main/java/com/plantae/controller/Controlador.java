@@ -105,25 +105,15 @@ public class Controlador {
      * @return
      */
     @PostMapping("/cadastro-plantas")
-    public ModelAndView plantas(@ModelAttribute Plant plant, Model model) {
-        model.addAttribute("plant", plant);
+    public String plantas(@ModelAttribute Plant plant) {
         plantRepository.save(plant);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-        return mv;
+        return "redirect:/cadastro-plantas";
     }
 
     @DeleteMapping("plants/{id}")
     public String deletePlant(@PathVariable int id) {
-        Optional<Plant> plant = plantRepository.findById(id);
         plantRepository.deleteById(id);
-//            model.addAttribute("plant", plant);
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        ModelAndView mv = new ModelAndView("plantas");
-//        Iterable<Plant> todasPlantas = plantRepository.findAll();
-//        mv.addObject("todas_plantas", todasPlantas);
         return "redirect:/cadastro-plantas";
     }
+
 }
