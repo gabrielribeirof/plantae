@@ -71,4 +71,10 @@ public class Controlador {
     public String plantas() {
         return "plantas";
     }
+
+    @GetMapping("/relatorio")
+    // @PreAuthorize("isAuthenticated()")
+    public String relatorio() {
+        return "relatorio";
+    }
 }
