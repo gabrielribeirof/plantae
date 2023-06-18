@@ -114,13 +114,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
           <input type="text" th:field="*{category}" class="type" />
         </div>
         <div class="week-days">
-        <input type="checkbox"  name="daysToWater[0]"><label for="">D</label>
+        <!-- <input type="checkbox"  name="daysToWater[0]"><label for="">D</label>
         <input type="checkbox"  name="daysToWater[1]"><label for="">S</label>
         <input type="checkbox"  name="daysToWater[2]"><label for="">T</label>
         <input type="checkbox"  name="daysToWater[3]"><label for="">Q</label>
         <input type="checkbox"  name="daysToWater[4]"><label for="">Q</label>
         <input type="checkbox"  name="daysToWater[5]"><label for="">S</label>
-        <input type="checkbox"  name="daysToWater[6]"><label for="">S</label>
+        <input type="checkbox"  name="daysToWater[6]"><label for="">S</label> -->
+        <input type="checkbox"  th:field="*{daysToWater[0]}"><label for="">D</label>
+        <input type="checkbox"  th:field="*{daysToWater[1]}"><label for="">S</label>
+        <input type="checkbox"  th:field="*{daysToWater[2]}"><label for="">T</label>
+        <input type="checkbox"  th:field="*{daysToWater[3]}"><label for="">Q</label>
+        <input type="checkbox"  th:field="*{daysToWater[4]}"><label for="">Q</label>
+        <input type="checkbox"  th:field="*{daysToWater[5]}"><label for="">S</label>
+        <input type="checkbox"  th:field="*{daysToWater[6]}"><label for="">S</label>
+        <!-- <div th:each="*daysToWater">
+          <input type="checkbox" th:value[]>
+        </div> -->
         </div>
         <div class="btn">
           <button type="submit" value="Submit">Confirmar</button>

@@ -71,29 +71,6 @@ public class Controlador {
     @PostMapping("/cadastro-plantas")
     public String plantas(@ModelAttribute Plant plant, Model model, HttpServletRequest request) {
         model.addAttribute("plant", plant);
-        boolean[] day = plant.getDaysToWater();
-        if (request.getParameter("daysToWater[0]") != null) {
-            day[0] = true;
-        }
-        if (request.getParameter("daysToWater[1]") != null) {
-            day[1] = true;
-        }
-        if (request.getParameter("daysToWater[2]") != null) {
-            day[2] = true;
-        }
-        if (request.getParameter("daysToWater[3]") != null) {
-            day[3] = true;
-        }
-        if (request.getParameter("daysToWater[4]") != null) {
-            day[4] = true;
-        }
-        if (request.getParameter("daysToWater[5]") != null) {
-            day[5] = true;
-        }
-        if (request.getParameter("daysToWater[6]") != null) {
-            day[6] = true;
-        }
-        plant.setDaysToWater(day);
         plantRepository.save(plant);
         return "plantas";
     }
