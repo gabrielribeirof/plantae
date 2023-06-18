@@ -101,17 +101,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       <form
       action="#"
       th:action="@{/cadastro-plantas}"
-      th:object="${plantas}"
+      th:object="${plant}"
       method="post"
       >
       <h2 class="register">Novo Lembrete de Rega</h2>
         <label for="name">Espécie</label>
         <div class="input">
-          <input type="text" class="nome"/>
+          <input type="text"  th:field="*{especie}"class="nome"/>
         </div>
         <label for="type">Tipo</label>
         <div class="input">
-          <input type="text" class="type" />
+          <input type="text" th:field="*{category}" class="type" />
         </div>
         <div class="week-days">
           <button class="my-button inactive">D</button>

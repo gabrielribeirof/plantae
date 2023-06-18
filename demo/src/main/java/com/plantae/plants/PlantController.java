@@ -12,8 +12,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,7 +34,7 @@ public class PlantController implements PlantServices {
     @Autowired
     PlantRepository plantRepository;
 
-    @GetMapping
+    @GetMapping("/all")
     @Override
     public List<Plant> findAll() {
         return (List<Plant>) plantRepository.findAll();
@@ -43,11 +45,6 @@ public class PlantController implements PlantServices {
     public ResponseEntity<Plant> newPlant(@RequestBody Plant plant) {
         Plant newPlant = plantRepository.save(plant);
         return new ResponseEntity<>(newPlant, HttpStatus.CREATED);
-    }
-
-    @GetMapping("/cadastrar")
-    public String cadastrar() {
-        return "cadastro-plantas";
     }
 
     @GetMapping("/{id}")
@@ -69,7 +66,6 @@ public class PlantController implements PlantServices {
             newPlant.setEspecie(bodyPlant.getEspecie());
             newPlant.setSun(bodyPlant.getSun());
             newPlant.setWater(bodyPlant.getWater());
-
             Plant updatedPlant = plantRepository.save(newPlant);
             return new ResponseEntity<>(updatedPlant, HttpStatus.OK);
         } else {
@@ -133,7 +129,7 @@ public class PlantController implements PlantServices {
 
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-        
+
         return new ResponseEntity(countWateredPlants.get(keys.get(0)), HttpStatus.OK);
     }
 
@@ -156,7 +152,7 @@ public class PlantController implements PlantServices {
 
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-        
+
         return new ResponseEntity(countWateredPlants.get(keys.get(keys.size())), HttpStatus.OK);
     }
 

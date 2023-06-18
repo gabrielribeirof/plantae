@@ -13,7 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
   <body>
     <header>
       <div class="container">
-        <h2>Bem vindo!!</h2>
+          <h2>Bem vindo, <span th:text="${#authentication.principal.nome}"/>!</h2>
       </div>
       <div class="container">
         <h2>Home</h2>
@@ -101,26 +101,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       <form
       action="#"
       th:action="@{/cadastro-plantas}"
-      th:object="${plantas}"
+      th:object="${plant}"
       method="post"
       >
       <h2 class="register">Novo Lembrete de Rega</h2>
         <label for="name">Espécie</label>
         <div class="input">
-          <input type="text" class="nome"/>
+          <input type="text"  th:field="*{especie}"class="nome"/>
         </div>
         <label for="type">Tipo</label>
         <div class="input">
-          <input type="text" class="type" />
+          <input type="text" th:field="*{category}" class="type" />
         </div>
         <div class="week-days">
-          <button class="my-button inactive">D</button>
-          <button class="my-button inactive">S</button>
-          <button class="my-button inactive">T</button>
-          <button class="my-button inactive">Q</button>
-          <button class="my-button inactive">Q</button>
-          <button class="my-button inactive">S</button>
-          <button class="my-button inactive">S</button>
+        <input type="checkbox"  name="daysToWater[0]"><label for="">D</label>
+        <input type="checkbox"  name="daysToWater[1]"><label for="">S</label>
+        <input type="checkbox"  name="daysToWater[2]"><label for="">T</label>
+        <input type="checkbox"  name="daysToWater[3]"><label for="">Q</label>
+        <input type="checkbox"  name="daysToWater[4]"><label for="">Q</label>
+        <input type="checkbox"  name="daysToWater[5]"><label for="">S</label>
+        <input type="checkbox"  name="daysToWater[6]"><label for="">S</label>
         </div>
         <div class="btn">
           <button type="submit" value="Submit">Confirmar</button>

@@ -42,13 +42,14 @@ public class Plant implements Serializable {
 
     @NotEmpty
     private boolean[] daysToWater = new boolean[7];
-    
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @JsonIgnoreProperties("plant")
     private User user;
-    
-    public Plant(){}
+
+    public Plant() {
+    }
 
     public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater) {
         this.id = id;
