@@ -4,8 +4,8 @@
  */
 package com.plantae.plants;
 
-import com.example.demo.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.plantae.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Willian
+ * @author Karol
  */
 @Entity
 public class Plant implements Serializable {

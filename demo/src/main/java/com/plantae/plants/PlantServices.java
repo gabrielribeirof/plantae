@@ -1,4 +1,4 @@
-package com.example.demo.plants;
+package com.plantae.plants;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;

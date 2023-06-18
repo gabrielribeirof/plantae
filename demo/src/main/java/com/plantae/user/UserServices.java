@@ -1,5 +1,6 @@
-package com.example.demo.user;
+package com.plantae.user;
 
+import com.plantae.user.User;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

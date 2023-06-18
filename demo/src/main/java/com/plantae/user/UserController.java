@@ -29,12 +29,18 @@ public class UserController implements UserServices {
     @Autowired
     UserRepository userRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping
+    @Override
     public List<User> findAll() {
         return (List<User>) userRepository.findAll();
     }
 
     @PostMapping
+    @Override
     public ResponseEntity<User> newUser(@RequestBody User user) {
         if (user.getNome() == null || user.getNome().isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -45,6 +51,7 @@ public class UserController implements UserServices {
     }
 
     @GetMapping("/{id}")
+    @Override
     public ResponseEntity<User> findById(@PathVariable int id) {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional.map(produto -> new ResponseEntity<>(produto, HttpStatus.OK))
@@ -52,6 +59,7 @@ public class UserController implements UserServices {
     }
 
     @PutMapping("/{id}")
+    @Override
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User bodyUser) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
@@ -67,6 +75,7 @@ public class UserController implements UserServices {
     }
 
     @DeleteMapping("/{id}")
+    @Override
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
