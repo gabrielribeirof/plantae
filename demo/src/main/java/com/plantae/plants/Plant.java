@@ -1,5 +1,8 @@
-
-package com.example.demo.plants;
+/*
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
+ */
+package com.plantae.plants;
 
 import com.example.demo.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,16 +30,16 @@ public class Plant implements Serializable {
 
     @NotEmpty
     private String especie;
-    
+
     @NotEmpty
     private String category;
-    
+
     @NotEmpty
-    private int water; // storage with 1, 2 or 3  
-    
+    private int water; // storage with 1, 2 or 3
+
     @NotEmpty
     private int sun; // storage with 1, 2 or 3
-    
+
     @NotEmpty
     private boolean[] daysToWater = new boolean[7];
     

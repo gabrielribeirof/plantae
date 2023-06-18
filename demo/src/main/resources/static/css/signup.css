@@ -1,105 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Poppins&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
+body {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
+}
+.popup {
+  position: fixed;
+  top: 10%;
+  left: 42.5%;
+  width: 15%;
+  border-radius: 30px;
+  background-color: #f37d72; /* Red background color */
+  color: #fff; /* White text color */
+  text-align: center;
+  padding: 10px;
 }
 
-.form{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min-content;
-    height: min-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 5px 5px 10px #2C854A;
-    padding: 3rem 2rem 3rem 2rem;
+.popup-message {
+  display: inline-block;
 }
 
-.title{
-    font-size: 1.8rem;
-    margin-bottom: 10%;
+/* Center the popup horizontally */
+.popup::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
 }
 
-.input{
-    min-width: 280px;
-    border: 22px;
-    border-bottom: 1px solid #c9c9c9;
-    padding: 5px;
-    margin: 0px 0px 12px -5px;
-    margin: 0.5rem 0rem 2.5rem 0rem;
+.popup-message {
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.input input{
-    width: 80%;
-    border: none;
-    outline: none;
-    transform: translateY(-10%);
-    margin-bottom: 0rem;
-}
-.register {
-    position: relative;
-    left: 25%;
-    font-size: 1.5rem;
-    margin-bottom: 4.5rem;
-    color: #000000;
-}
-
-.btn button{
-    font-size: large;
-    border: none;
-    border-radius: 25px;
-    height: 40px;
-    min-width: 280px;
-    color: white;
-    background-color: #2d7e48;
-    padding: 5px;
-    cursor: pointer;
+.form {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min-content;
+  height: min-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 10px #2c854a;
+  padding: 3rem 2rem 2rem 2rem;
 }
 
-.btn button:hover{
-    background-color: #81d19d;
-    transition: all 0.2s ease;
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 10%;
 }
 
-label{
-    font-size: 1.2rem;
-    color: #72C28E;
+.input {
+  min-width: 280px;
+  border: 22px;
+  border-bottom: 1px solid #c9c9c9;
+  padding: 5px;
+  margin: 0px 0px 12px -5px;
+  margin: 0.5rem 0rem 2.5rem 0rem;
 }
 
-/* <body>
-        <div class="form">
-            <form action="">
-                <h2 class="register">Registre-se</h2>
-                <label for="name">Nome completo</label>
-                <div class="input">
-                    <input type="text" name="name" class="name">
-                </div>
-                <label for="userName">Nome de usuário</label>
-                <div class="input">
-                    <input type="text" name="userName" class="userName">
-                </div>
-                <label for="password">Senha</label>
-                <div class="input">
-                    <input type="text" name="password" class="password">
-                </div>
+.input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  transform: translateY(-10%);
+  margin-bottom: 0rem;
+}
+.register,
+.login {
+  position: relative;
+  left: 25%;
+  font-size: 1.5rem;
+  margin-bottom: 4.5rem;
+  color: #000000;
+}
 
-                <div class="btn">
-                    <button type="submit">Confirmar</button>
-                </div>
-            </form>
-        </div>
-    </body> */
+.login {
+  position: relative;
+  left: 35%;
+}
+.btn button,
+.logout input {
+  font-size: large;
+  border: none;
+  border-radius: 25px;
+  height: 40px;
+  min-width: 280px;
+  color: white;
+  background-color: #2d7e48;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.btn button:hover,
+.logout input:hover {
+  background-color: #81d19d;
+  transition: all 0.2s ease;
+}
+
+label {
+  font-size: 1.2rem;
+  color: #72c28e;
+}

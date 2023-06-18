@@ -1,4 +1,8 @@
-package com.example.demo.plants;
+/*
+ * Projeto da disciplina de Introducao a Tecnologia Java
+ * Membros: Bruno Augusto Furquim, Gabriel Ribeiro Ferreira, Karolyne Domiciano Marques, Willian Yoshio Murayama
+ */
+package com.plantae.plants;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +43,11 @@ public class PlantController implements PlantServices {
     public ResponseEntity<Plant> newPlant(@RequestBody Plant plant) {
         Plant newPlant = plantRepository.save(plant);
         return new ResponseEntity<>(newPlant, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/cadastrar")
+    public String cadastrar() {
+        return "cadastro-plantas";
     }
 
     @GetMapping("/{id}")
