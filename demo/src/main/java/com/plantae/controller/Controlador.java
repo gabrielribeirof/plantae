@@ -8,7 +8,6 @@ import com.plantae.plants.Plant;
 import com.plantae.plants.PlantRepository;
 import com.plantae.user.User;
 import com.plantae.user.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -73,11 +72,13 @@ public class Controlador {
     }
 
     @PostMapping("/cadastro-plantas")
-    public String plantas(@ModelAttribute Plant plant, Model model, HttpServletRequest request) {
+    public ModelAndView plantas(@ModelAttribute Plant plant, Model model) {
         model.addAttribute("plant", plant);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        plant.setUser((User) auth.getPrincipal());
         plantRepository.save(plant);
-        return "plantas";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ModelAndView mv = new ModelAndView("plantas");
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        mv.addObject("todas_plantas", todasPlantas);
+        return mv;
     }
 }
