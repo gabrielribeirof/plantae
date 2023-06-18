@@ -113,14 +113,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div class="input">
           <input type="text" th:field="*{category}" class="type" />
         </div>
+        <div>
+          <label for="">Quantidade de regas por dia:</label>
+          <div>
+            <input type="radio" name="regas" checked th:field="*{water}" th:value="1"><label for="">1</label>
+            <input type="radio" name="regas" th:field="*{water}" th:value="2"><label for="">2</label>
+            <input type="radio" name="regas" th:field="*{water}" th:value="3"><label for="">3</label>
+          </div>
+        </div>
+        <div>
+          <label for="">Quantidade de sol por dia:</label>
+          <div>
+            <input type="radio" name="sol" checked th:field="*{sun}" th:value="1"><label for="">1</label>
+            <input type="radio" name="sol" th:field="*{sun}" th:value="2"><label for="">2</label>
+            <input type="radio" name="sol" th:field="*{sun}" th:value="3"><label for="">3</label>
+          </div>
+        </div>
         <div class="week-days">
-        <!-- <input type="checkbox"  name="daysToWater[0]"><label for="">D</label>
-        <input type="checkbox"  name="daysToWater[1]"><label for="">S</label>
-        <input type="checkbox"  name="daysToWater[2]"><label for="">T</label>
-        <input type="checkbox"  name="daysToWater[3]"><label for="">Q</label>
-        <input type="checkbox"  name="daysToWater[4]"><label for="">Q</label>
-        <input type="checkbox"  name="daysToWater[5]"><label for="">S</label>
-        <input type="checkbox"  name="daysToWater[6]"><label for="">S</label> -->
         <input type="checkbox"  th:field="*{daysToWater[0]}"><label for="">D</label>
         <input type="checkbox"  th:field="*{daysToWater[1]}"><label for="">S</label>
         <input type="checkbox"  th:field="*{daysToWater[2]}"><label for="">T</label>
@@ -128,9 +137,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <input type="checkbox"  th:field="*{daysToWater[4]}"><label for="">Q</label>
         <input type="checkbox"  th:field="*{daysToWater[5]}"><label for="">S</label>
         <input type="checkbox"  th:field="*{daysToWater[6]}"><label for="">S</label>
-        <!-- <div th:each="*daysToWater">
-          <input type="checkbox" th:value[]>
-        </div> -->
         </div>
         <div class="btn">
           <button type="submit" value="Submit">Confirmar</button>
