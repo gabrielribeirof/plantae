@@ -9,10 +9,10 @@
   </head>
   <body>
     <div class="popup" th:if="${param.error}">
-      <span class="popup-message">Invalid username and password.</span>
+      <span class="popup-message">Nome de usuário ou senha incorreto</span>
     </div>
     <div class="popup" th:if="${param.logout}">
-      <span class="popup-message">You have been logged out.</span>
+      <span class="popup-message">Você deslogou</span>
     </div>
     <div class="form">
       <form th:action="@{/login}" method="post">
