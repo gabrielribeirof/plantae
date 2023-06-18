@@ -40,7 +40,7 @@ public class Controlador {
         if (username.equals("anonymousUser")) {
             return "login";
         } else {
-            return "index";
+            return "redirect:/cadastro-plantas";
         }
     }
 
