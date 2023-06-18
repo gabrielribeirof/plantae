@@ -37,7 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </div>
     <div class="content">
       <div class="cards-container">
-        <div class="card">
+        <div th:each="evento : ${todas_plantas}" class="card">
           <div class="card-separator">
             <div>
               <svg
@@ -77,8 +77,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
               </svg>
             </div>
             <div class="plant-data">
-              <h3>planta.nome</h3>
-              <p>Orchidaceae</p>
+              <h3><a th:href="@{'plants/'+${evento.id}}"><span th:text="${evento.especie}"></span></a></h3>
+              <p><span th:text="${evento.category}"></span></p>
             </div>
           </div>
           <div class="plant-management">
