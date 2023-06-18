@@ -8,6 +8,7 @@ import com.plantae.plants.Plant;
 import com.plantae.plants.PlantRepository;
 import com.plantae.user.User;
 import com.plantae.user.UserRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -110,5 +113,17 @@ public class Controlador {
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
         return mv;
+    }
+
+    @DeleteMapping("plants/{id}")
+    public String deletePlant(@PathVariable int id) {
+        Optional<Plant> plant = plantRepository.findById(id);
+        plantRepository.deleteById(id);
+//            model.addAttribute("plant", plant);
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        ModelAndView mv = new ModelAndView("plantas");
+//        Iterable<Plant> todasPlantas = plantRepository.findAll();
+//        mv.addObject("todas_plantas", todasPlantas);
+        return "redirect:/cadastro-plantas";
     }
 }

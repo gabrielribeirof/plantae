@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -46,8 +47,8 @@ public interface PlantServices {
      * @param id
      * @return
      */
-    public ResponseEntity<Void> deletePlant(@PathVariable int id);
-
+//    public ResponseEntity<Void> deletePlant(@PathVariable int id);
+//    public ModelAndView deletePlant(@PathVariable int id);
     /**
      *
      * @param userid
