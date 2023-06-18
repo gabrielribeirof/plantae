@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -63,14 +64,19 @@ public class Controlador {
     }
 
     @GetMapping("/cadastro-plantas")
-    public String plantas(Model model) {
+    public ModelAndView plantas(Model model) {
+        ModelAndView mv = new ModelAndView("plantas");
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        mv.addObject("todas_plantas", todasPlantas);
         model.addAttribute("plant", new Plant());
-        return "plantas";
+        return mv;
     }
 
     @PostMapping("/cadastro-plantas")
     public String plantas(@ModelAttribute Plant plant, Model model, HttpServletRequest request) {
         model.addAttribute("plant", plant);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        plant.setUser((User) auth.getPrincipal());
         plantRepository.save(plant);
         return "plantas";
     }
