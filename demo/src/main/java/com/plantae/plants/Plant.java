@@ -4,17 +4,22 @@
  */
 package com.plantae.plants;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.plantae.user.User;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  *
- * @author Willian
+ * @author Karol
  */
 @Entity
 public class Plant implements Serializable {
@@ -36,30 +41,22 @@ public class Plant implements Serializable {
     private int sun; // storage with 1, 2 or 3
 
     @NotEmpty
-    private ArrayList<String> daysToWater;
+    private boolean[] daysToWater = new boolean[7];
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JsonIgnoreProperties("plant")
+    private User user;
+    
+    public Plant(){}
 
-    @NotEmpty
-    private boolean watered; // check plant
-
-    public Plant() {
-    }
-
-    public Plant(int id, String especie, String category, int water, int sun, ArrayList<String> daysToWater, boolean watered) {
+    public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater) {
         this.id = id;
         this.especie = especie;
         this.category = category;
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
-        this.watered = watered;
-    }
-
-    public boolean isWatered() {
-        return watered;
-    }
-
-    public void setWatered(boolean watered) {
-        this.watered = watered;
     }
 
     public int getId() {
@@ -102,11 +99,15 @@ public class Plant implements Serializable {
         this.sun = sun;
     }
 
-    public ArrayList<String> getDaysToWater() {
+    public boolean[] getDaysToWater() {
         return daysToWater;
     }
 
-    public void setDaysToWater(ArrayList<String> daysToWater) {
+    public void setDaysToWater(boolean[] daysToWater) {
         this.daysToWater = daysToWater;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
