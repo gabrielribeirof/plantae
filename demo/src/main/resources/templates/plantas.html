@@ -20,7 +20,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       </div>
       <div class="container">
         <button>
-          <h1>Sair</h1>
+          <form th:action="@{/logout}" method="post" class="logout">
+          <input type="submit" value="Sair" class="sair" />
+        </form>
         </button>
       </div>
     </header>

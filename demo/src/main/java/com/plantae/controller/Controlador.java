@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -27,7 +29,13 @@ public class Controlador {
 
     @GetMapping("/")
     public String home() {
-        return "index";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        if (username.equals("anonymousUser")) {
+            return "login";
+        } else {
+            return "index";
+        }
     }
 
     @GetMapping("/login")
@@ -56,7 +64,7 @@ public class Controlador {
         usuario.setSenha(passwordencoder.encode(usuario.getPassword()));
         userRepository.save(usuario);
         model.addAttribute("usuario", usuario);
-        return "boasvindas";
+        return "login";
     }
 
     @GetMapping("/plantas")

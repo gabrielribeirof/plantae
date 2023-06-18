@@ -36,8 +36,12 @@ public class UserController implements UserServices {
 
     @PostMapping
     public ResponseEntity<User> newUser(@RequestBody User user) {
-        User newUser = userRepository.save(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        if (user.getNome() == null || user.getNome().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            User newUser = userRepository.save(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        }
     }
 
     @GetMapping("/{id}")
