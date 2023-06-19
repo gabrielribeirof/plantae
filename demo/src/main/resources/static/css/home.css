@@ -13,12 +13,9 @@ body {
   background: rgb(255, 255, 255);
 }
 
-header {
-  position: relative;
-  top: 0;
-  left: 0;
+header {  
   width: 100%;
-  height: 10vh;
+  height: 100px;
   background: #264837;
   display: flex;
   justify-content: space-between;
@@ -38,23 +35,24 @@ header {
   font-weight: bold;
 }
 
-.week,
-.week-days {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 7.5vh;
+.week {
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
   background: transparent;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  padding: 1rem;
-  margin: 2rem 0rem 2rem 0rem;
+  column-gap: 2rem;
+  padding: 2.5rem;
+  overflow-x: scroll;
 }
 .week-days {
+  display: flex;
+  overflow-x: scroll;
   background: #f4f4f4;
+  margin-bottom: 20px;
   padding: 0.5rem;
+  justify-content: space-between;
   border-radius: 15px;
 }
 
@@ -64,11 +62,12 @@ header {
   margin: 0rem 0.3rem 0rem 0.3rem;
   color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background: #979797;
   width: 36px;
   height: 36px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .my-button.active {
@@ -77,14 +76,13 @@ header {
 }
 
 .week-btn {
+  width: 10rem;
   background-color: #daf3e1;
   border: none;
   border-radius: 15px;
   padding: 1rem 1.5rem;
-  margin: 0rem 0.5rem 0rem 0.5rem;
   font-size: 1.25rem;
   color: rgb(55, 55, 55);
-  width: 10rem;
   font: bold;
   cursor: pointer;
 }
@@ -97,22 +95,29 @@ header {
 }
 
 .content {
-  position: relative;
-  top: 0;
-  left: 5%;
-  width: 90%;
-  height: 75.6vh;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  height: calc(100vh - 306px);
   background: transparent;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 0rem 5rem 0rem 5rem;
-  margin: 0;
+  padding: 0 2.5rem;
+  column-gap: 2.5rem;
+}
+
+@media (max-width: 990px) {
+  .content {
+    flex-direction: column;
+    row-gap: 40px;
+    height: 100%;
+  }
 }
 
 .cards-container {
-  height: 70vh;
-  width: 50%;
+  width: 60%;
+  height: 100%;
   display: inline-block;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -126,6 +131,7 @@ header {
 
 .card,
 .reminder {
+  position: relative;
   border-radius: 10px;
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.2);
   background-color: #e8e8e8;
@@ -136,6 +142,7 @@ header {
   padding: 1rem 0.5rem 1rem 0.5rem;
   margin-block-end: 1rem;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  overflow: auto;
 }
 
 .card {
@@ -151,6 +158,28 @@ header {
   align-items: center;
   align-self: self-end;
 }
+
+.reminder {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  margin: 0rem;
+  background-color: #fcfcfc;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+}
+
+@media (max-width: 990px) {
+  .cards-container, .reminder {
+    width: 100%;
+  }
+}
+
 .plant-management {
   display: flex;
   flex-wrap: wrap;
@@ -177,20 +206,6 @@ header {
 form {
   width: 100%;
   height: 100%;
-}
-.reminder {
-  height: 70vh;
-  width: 25%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem;
-  margin: 0rem;
-  background-color: #fcfcfc;
-  border: 1px solid #d3d3d3;
-  border-radius: 16px;
-  box-shadow: 0 0 0px rgba(0, 0, 0, 0);
 }
 
 .checkbox {
