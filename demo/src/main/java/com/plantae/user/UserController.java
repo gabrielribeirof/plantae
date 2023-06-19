@@ -43,7 +43,7 @@ public class UserController implements UserServices {
         if (username.equals("anonymousUser")) {
             return "login";
         } else {
-            return "redirect:/cadastro-plantas";
+            return "redirect:/plants/cadastro-plantas";
         }
     }
 
@@ -70,8 +70,8 @@ public class UserController implements UserServices {
         userRepository.save(user);
         return "login";
     }
-    
-     /**
+
+    /**
      *
      * @param model
      * @return
@@ -99,7 +99,7 @@ public class UserController implements UserServices {
 
         userRepository.deleteById(id);
         userRepository.save(newUser);
-        
+
         return "redirect:/cadastro-plantas";
     }
 

@@ -68,7 +68,7 @@ public class PlantController implements PlantServices {
         if (user != null) {
             plant.setUser(user);
             plantRepository.save(plant);
-            return "redirect:/cadastro-plantas";
+            return "redirect:/plants/cadastro-plantas";
         }
         // Handle user not found scenario
         return "error";
@@ -91,19 +91,19 @@ public class PlantController implements PlantServices {
         newPlant.setSun(bodyPlant.getSun());
         newPlant.setWater(bodyPlant.getWater());
         plantRepository.save(newPlant);
-        return "redirect:/cadastro-plantas";
+        return "redirect:/plants/cadastro-plantas";
     }
-    
+
     /**
      *
      * @param id
      * @return
      */
-    @DeleteMapping("plants/{id}")
+    @DeleteMapping("/{id}")
     @Override
     public String deletePlant(@PathVariable int id) {
         plantRepository.deleteById(id);
-        return "redirect:/cadastro-plantas";
+        return "redirect:/plants/cadastro-plantas";
     }
 
     // REPORTS *****************************************************************
@@ -136,9 +136,9 @@ public class PlantController implements PlantServices {
                 break;
             }
         }
-        
+
         mv.addObject("total", total);
-        
+
         return mv;
     }
 
@@ -169,7 +169,7 @@ public class PlantController implements PlantServices {
 
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-        
+
         mv.addObject("plant", countWateredPlants.get(keys.get(0)));
         return mv;
     }
@@ -185,7 +185,7 @@ public class PlantController implements PlantServices {
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
 //        model.addAttribute("plant", new Plant());
-       Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
 
         for (Plant plant : plants) {
@@ -201,7 +201,7 @@ public class PlantController implements PlantServices {
 
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-        
+
         mv.addObject("plant", countWateredPlants.get(keys.get(keys.size())));
         return mv;
     }
@@ -227,7 +227,7 @@ public class PlantController implements PlantServices {
                 total++;
             }
         }
-        
+
         mv.addObject("total", total);
         return mv;
     }
@@ -253,7 +253,7 @@ public class PlantController implements PlantServices {
                 total++;
             }
         }
-        
+
         mv.addObject("total", total);
         return mv;
     }
