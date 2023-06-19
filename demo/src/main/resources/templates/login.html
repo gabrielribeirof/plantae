@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <input type="text">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/signup.css"/>
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="popup" th:if="${param.error}">
+      <span class="popup-message">Nome de usuário ou senha incorreto</span>
+    </div>
+    <div class="popup" th:if="${param.logout}">
+      <span class="popup-message">Você deslogou</span>
+    </div>
+    <div class="form">
+      <form th:action="@{/login}" method="post">
+        <h2 class="login">Login</h2>
         <label for="">Nome de usuário</label>
-        
-    </div>
-    <div>
-        
-        <input type="password" name="" id="">
+        <div class="input">
+          <input type="text" name="username" />
+        </div>
         <label for="">Senha</label>
+        <div class="input">
+          <input type="password" name="password" id="" />
+        </div>
+        <div class="btn">
+          <button type="submit" value="submit">Entrar</button>
+        </form>
+        <div class="btn"><form action="/cadastro">
+          <button type="submit">Cadastrar-se</button>
+      </form></div>
+      </div>
     </div>
-    <button value="submit">Login</button>
-</body>
+  </body>
 </html>
