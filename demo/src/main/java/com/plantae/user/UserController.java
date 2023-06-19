@@ -96,10 +96,8 @@ public class UserController implements UserServices {
         newUser.setNome(bodyUser.getNome());
         newUser.setSenha(bodyUser.getSenha());
         newUser.setUsername(bodyUser.getUsername());
-
         userRepository.deleteById(id);
         userRepository.save(newUser);
-
         return "redirect:/cadastro-plantas";
     }
 
