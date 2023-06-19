@@ -4,26 +4,28 @@
  */
 package com.plantae.user;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Karol
  */
-@RestController
-@RequestMapping("/user")
+@Controller
+@RequestMapping("/")
 public class UserController implements UserServices {
 
     @Autowired
@@ -33,10 +35,26 @@ public class UserController implements UserServices {
      *
      * @return
      */
-    @GetMapping
+    @GetMapping("")
     @Override
-    public List<User> findAll() {
-        return (List<User>) userRepository.findAll();
+    public String home() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        if (username.equals("anonymousUser")) {
+            return "login";
+        } else {
+            return "redirect:/cadastro-plantas";
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("login")
+    @Override
+    public String login() {
+        return "login";
     }
 
     /**
@@ -44,28 +62,24 @@ public class UserController implements UserServices {
      * @param user
      * @return
      */
-    @PostMapping
+    @PostMapping("cadastro")
     @Override
-    public ResponseEntity<User> newUser(@RequestBody User user) {
-        if (user.getNome() == null || user.getNome().isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else {
-            User newUser = userRepository.save(user);
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-        }
+    public String newUser(@ModelAttribute User user) {
+        BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
+        user.setSenha(passwordencoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "login";
     }
-
-    /**
+    
+     /**
      *
-     * @param id
+     * @param model
      * @return
      */
-    @GetMapping("/{id}")
-    @Override
-    public ResponseEntity<User> findById(@PathVariable int id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        return userOptional.map(produto -> new ResponseEntity<>(produto, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/cadastro")
+    public String cadastro(Model model) {
+        model.addAttribute("usuario", new User());
+        return "cadastro";
     }
 
     /**
@@ -76,18 +90,17 @@ public class UserController implements UserServices {
      */
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User bodyUser) {
+    public String updateUser(@PathVariable int id, @RequestBody User bodyUser) {
         Optional<User> userOptional = userRepository.findById(id);
-        if (userOptional.isPresent()) {
-            User newUser = userOptional.get();
-            newUser.setNome(bodyUser.getNome());
-            newUser.setSenha(bodyUser.getSenha());
+        User newUser = userOptional.get();
+        newUser.setNome(bodyUser.getNome());
+        newUser.setSenha(bodyUser.getSenha());
+        newUser.setUsername(bodyUser.getUsername());
 
-            User updatedUser = userRepository.save(newUser);
-            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        userRepository.deleteById(id);
+        userRepository.save(newUser);
+        
+        return "redirect:/cadastro-plantas";
     }
 
     /**
@@ -97,13 +110,10 @@ public class UserController implements UserServices {
      */
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            userRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public String deleteUser(@PathVariable int id) {
+        userRepository.deleteById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.setAuthenticated(false);
+        return "redirect:/login";
     }
 }

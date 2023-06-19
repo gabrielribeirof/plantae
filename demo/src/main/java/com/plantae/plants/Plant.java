@@ -46,6 +46,7 @@ public class Plant implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @JsonIgnoreProperties("plant")
+    @NotEmpty
     private User user;
 
     /**
@@ -71,7 +72,8 @@ public class Plant implements Serializable {
         this.sun = sun;
         this.daysToWater = daysToWater;
     }
-
+    
+    
     /**
      *
      * @return
@@ -174,5 +176,9 @@ public class Plant implements Serializable {
      */
     public User getUser() {
         return user;
+    }
+    
+    public void setUser(User user){
+        this.user = user;
     }
 }
