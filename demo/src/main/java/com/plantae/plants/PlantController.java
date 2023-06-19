@@ -9,6 +9,7 @@ import com.plantae.user.UserRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,16 @@ public class PlantController implements PlantServices {
     @Override
     public ModelAndView plantas(Model model) {
         ModelAndView mv = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                plantas.add(p);
+            }
+        }
+        mv.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
         model.addAttribute("plant", new Plant());
         return mv;
     }
