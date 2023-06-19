@@ -43,7 +43,8 @@ public class Plant implements Serializable {
     @NotEmpty
     private boolean[] daysToWater = new boolean[7];
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @JsonIgnoreProperties("plant")
     @NotEmpty
@@ -72,8 +73,7 @@ public class Plant implements Serializable {
         this.sun = sun;
         this.daysToWater = daysToWater;
     }
-    
-    
+
     /**
      *
      * @return
@@ -177,8 +177,12 @@ public class Plant implements Serializable {
     public User getUser() {
         return user;
     }
-    
-    public void setUser(User user){
+
+    /**
+     *
+     * @param user
+     */
+    public void setUser(User user) {
         this.user = user;
     }
 }
