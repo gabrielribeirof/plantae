@@ -107,10 +107,10 @@
             <span th:text="${plants.watered} ? 'Regado' : 'Não regado'"></span>
             </div>
             <form action="#" th:action="@{'/plants/water/'+${plants.id}}" th:method="post">
-            <button th:unless="${plants.watered}" type="submit">Regar</button>
+            <button th:unless="${plants.watered}" type="submit" class="checkbox"></button>
             </form>
             <form action="#" th:action="@{'/plants/not-watered/'+${plants.id}}" th:method="post">
-              <button th:if="${plants.watered}" type="submit">Não regado</button>
+              <button th:if="${plants.watered}" type="submit" class="checkbox"></button>
               </form>
           </div>
           <div class="plant-management">
