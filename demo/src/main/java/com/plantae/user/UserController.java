@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author Karol
- */
 @Controller
 @RequestMapping("/")
 public class UserController implements UserServices {
@@ -32,6 +28,7 @@ public class UserController implements UserServices {
     UserRepository userRepository;
 
     /**
+     * Caminho para a pagina principal, redireciona para o cadastro
      *
      * @return
      */
@@ -48,6 +45,7 @@ public class UserController implements UserServices {
     }
 
     /**
+     * Caminho para login
      *
      * @return
      */
@@ -58,6 +56,7 @@ public class UserController implements UserServices {
     }
 
     /**
+     * Post para cadastro
      *
      * @param user
      * @return
@@ -72,6 +71,7 @@ public class UserController implements UserServices {
     }
 
     /**
+     * Caminho para cadastro
      *
      * @param model
      * @return

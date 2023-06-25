@@ -27,10 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Karol
- */
 @Controller
 @RequestMapping("/plants")
 public class PlantController implements PlantServices {
@@ -42,6 +38,7 @@ public class PlantController implements PlantServices {
     UserRepository userRepository;
 
     /**
+     * Caminho de cadastro de plantas
      *
      * @param model
      * @return
@@ -64,6 +61,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Post de cadastro de plantas
      *
      * @param plant
      * @return
@@ -83,6 +81,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para modificacao de plantas
      *
      * @param model
      * @param id
@@ -98,6 +97,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Post de modificacao de plantas
      *
      * @param plant
      * @param id
@@ -106,7 +106,6 @@ public class PlantController implements PlantServices {
     @PostMapping("/modify/{id}")
     public String modifiyPlantsPost(@ModelAttribute Plant plant, @PathVariable int id) {
         Plant planta = plantRepository.findById(id).get();
-//        planta.setId(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         planta.setCategory(plant.getCategory());
         planta.setEspecie(plant.getEspecie());
@@ -115,7 +114,6 @@ public class PlantController implements PlantServices {
         if (user != null) {
             planta.setUser(user);
         }
-//        planta.setUser(plant.getUser());
         planta.setWater(plant.getWater());
         planta.setWatered(plant.isWatered());
         plantRepository.save(planta);
@@ -123,6 +121,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de domingo
      *
      * @param model
      * @return
@@ -147,6 +146,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de segunda feira
      *
      * @param model
      * @return
@@ -171,6 +171,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de terca feira
      *
      * @param model
      * @return
@@ -195,6 +196,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de quarta feira
      *
      * @param model
      * @return
@@ -219,6 +221,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de quinta feira
      *
      * @param model
      * @return
@@ -243,6 +246,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de sexta feira
      *
      * @param model
      * @return
@@ -267,6 +271,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Caminho para plantas de sabado
      *
      * @param model
      * @return
@@ -291,6 +296,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Post para marcar a planta como regada
      *
      * @param id
      * @return
@@ -304,6 +310,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Post para marcar a planta como nao regada
      *
      * @param id
      * @return
@@ -337,6 +344,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Post para deletar a planta
      *
      * @param id
      * @return
@@ -393,7 +401,6 @@ public class PlantController implements PlantServices {
         ModelAndView mv = new ModelAndView("plantas");
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
 
@@ -407,7 +414,6 @@ public class PlantController implements PlantServices {
             }
             countWateredPlants.put(total, plant);
         }
-
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
 
@@ -473,6 +479,7 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Relatorio para as plantas de cada dia da semana
      *
      * @param day
      * @return
@@ -535,7 +542,6 @@ public class PlantController implements PlantServices {
         }
         mv.addObject("todas_plantas", plantsWeek);
         mv.addObject("totalPlants", totalPlants);
-
         mv.addObject("user", user.getNome());
         mv.addObject("dayOfWeek", dayOfWeek);
         mv.addObject("totalNotWatered", totalNotWatered);
