@@ -59,7 +59,6 @@ public class PlantController implements PlantServices {
             }
         }
         mv.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
         model.addAttribute("plant", new Plant());
         return mv;
     }
@@ -81,6 +80,34 @@ public class PlantController implements PlantServices {
         }
         // Handle user not found scenario
         return "error";
+    }
+
+    @GetMapping("/modify/{id}")
+    public ModelAndView modifyPlants(Model model, @PathVariable int id) {
+        ModelAndView mv = new ModelAndView("modification");
+        Plant plant = plantRepository.findById(id).get();
+        model.addAttribute("plant", plant);
+        model.addAttribute("id", id);
+        return mv;
+    }
+
+    @PostMapping("/modify/{id}")
+    public String modifiyPlantsPost(@ModelAttribute Plant plant, @PathVariable int id) {
+        Plant planta = plantRepository.findById(id).get();
+//        planta.setId(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        planta.setCategory(plant.getCategory());
+        planta.setEspecie(plant.getEspecie());
+        planta.setDaysToWater(plant.getDaysToWater());
+        planta.setSun(plant.getSun());
+        if (user != null) {
+            planta.setUser(user);
+        }
+//        planta.setUser(plant.getUser());
+        planta.setWater(plant.getWater());
+        planta.setWatered(plant.isWatered());
+        plantRepository.save(planta);
+        return "redirect:/plants/cadastro-plantas";
     }
 
     @GetMapping("/sunday")
@@ -384,7 +411,6 @@ public class PlantController implements PlantServices {
                 total++;
             }
         }
-
         mv.addObject("total", total);
         return mv;
     }

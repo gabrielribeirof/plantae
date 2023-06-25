@@ -28,6 +28,7 @@ a{
 }
 .container {
   color: #ffffff;
+  text-align: center;
 }
 .container button, .sair {
   color: #ffffff;
@@ -48,6 +49,7 @@ a{
   column-gap: 2rem;
   padding: 2.5rem;
   overflow-x: scroll;
+  justify-content: space-evenly;
 }
 .week-days {
   display: flex;

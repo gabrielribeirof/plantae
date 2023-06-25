@@ -7,6 +7,7 @@ package com.plantae.plants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.plantae.user.User;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,21 +26,27 @@ import java.io.Serializable;
 public class Plant implements Serializable {
 
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(updatable = true)
     @NotEmpty
     private String especie;
 
+    @Column(updatable = true)
     @NotEmpty
     private String category;
 
+    @Column(updatable = true)
     @NotEmpty
     private int water; // storage with 1, 2 or 3
 
+    @Column(updatable = true)
     @NotEmpty
     private int sun; // storage with 1, 2 or 3
 
+    @Column(updatable = true)
     @NotEmpty
     private boolean[] daysToWater = new boolean[7];
 
@@ -51,6 +58,7 @@ public class Plant implements Serializable {
     private User user;
 
     @NotEmpty
+    @Column(updatable = true)
     private boolean watered;
 
     /**

@@ -29,6 +29,7 @@ a {
 
 .container {
   color: #ffffff;
+  text-align: center;
 }
 .container button,
 .sair {
@@ -50,6 +51,7 @@ a {
   column-gap: 2rem;
   padding: 2.5rem;
   overflow-x: scroll;
+  justify-content: space-evenly;
 }
 .week-days {
   display: flex;
@@ -62,7 +64,7 @@ a {
 }
 
 .week-btn {
-  width: 7rem;
+  width: 8rem;
   background-color: #daf3e1;
   border: none;
   border-radius: 15px;
