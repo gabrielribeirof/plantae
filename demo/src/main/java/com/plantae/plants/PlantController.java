@@ -6,10 +6,10 @@ package com.plantae.plants;
 
 import com.plantae.user.User;
 import com.plantae.user.UserRepository;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -224,6 +224,14 @@ public class PlantController implements PlantServices {
         return "redirect:/plants/cadastro-plantas";
     }
 
+    @PostMapping("not-watered/{id}")
+    public String notWateredPlant(@PathVariable int id) {
+        Plant plant = plantRepository.findById(id).get();
+        plant.setWatered(false);
+        plantRepository.save(plant);
+        return "redirect:/plants/cadastro-plantas";
+    }
+
     /**
      *
      * @param id
@@ -268,7 +276,6 @@ public class PlantController implements PlantServices {
         ModelAndView mv = new ModelAndView("plantas");
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
@@ -388,23 +395,71 @@ public class PlantController implements PlantServices {
      * @param userid
      * @return
      */
-    @GetMapping("/{userid}/reports/{day}/total-not-watered")
-    @Override
-    public ModelAndView notWateredOfDay(@PathVariable int day, @PathVariable int userid) {
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
-        int total = 0;
+    @GetMapping("/reports/{day}")
+//    @Override
+    public ModelAndView report(@PathVariable int day) {
+        String dayOfWeek;
+        switch (day) {
+            case 0:
+                dayOfWeek = "domingo";
+                break;
+            case 1:
+                dayOfWeek = "segunda";
+                break;
+            case 2:
+                dayOfWeek = "terça";
+                break;
+            case 3:
+                dayOfWeek = "quarta";
+                break;
+            case 4:
+                dayOfWeek = "quinta";
+                break;
+            case 5:
+                dayOfWeek = "sexta";
+                break;
+            case 6:
+                dayOfWeek = "sábado";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        ModelAndView mv = new ModelAndView("relatorio");
+        int totalNotWatered = 0;
+        int totalWatered = 0;
+        int wateredPlantWeek = 0;
+        int notWateredPlantWeek = 0;
+        int totalPlants = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
-
+        ArrayList<Plant> plantsWeek = new ArrayList<>();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         for (Plant plant : plants) {
-            if (plant.getDaysToWater()[day] == false) {
-                total++;
+            if (plant.getUser().getId().equals(user.getId())) {
+                totalPlants++;
+                if (plant.isWatered()) {
+                    totalWatered++;
+                } else {
+                    totalNotWatered++;
+                }
+                if (plant.getDaysToWater()[day]) {
+                    if (plant.isWatered()) {
+                        wateredPlantWeek++;
+                        plantsWeek.add(plant);
+                    } else {
+                        notWateredPlantWeek++;
+                    }
+                }
             }
         }
+        mv.addObject("todas_plantas", plantsWeek);
+        mv.addObject("totalPlants", totalPlants);
 
-        mv.addObject("total", total);
+        mv.addObject("user", user.getNome());
+        mv.addObject("dayOfWeek", dayOfWeek);
+        mv.addObject("totalNotWatered", totalNotWatered);
+        mv.addObject("totalWatered", totalWatered);
+        mv.addObject("wateredPlantWeek", wateredPlantWeek);
+        mv.addObject("notWateredPlantWeek", notWateredPlantWeek);
         return mv;
     }
 }

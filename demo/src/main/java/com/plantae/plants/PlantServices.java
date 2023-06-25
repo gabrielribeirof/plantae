@@ -44,7 +44,7 @@ public interface PlantServices {
      * @return
      */
     public String deletePlant(@PathVariable int id);
-    
+
     /**
      *
      * @param userid
@@ -78,5 +78,5 @@ public interface PlantServices {
      * @param userid
      * @return
      */
-    public ModelAndView notWateredOfDay(@PathVariable int day, @PathVariable int userid);
+//    public ModelAndView notWateredOfDay(@PathVariable int day, @PathVariable int userid);
 }

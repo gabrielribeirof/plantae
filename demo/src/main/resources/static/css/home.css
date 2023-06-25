@@ -23,6 +23,9 @@ header {
   padding: 1rem;
 }
 
+a{
+  color: white;
+}
 .container {
   color: #ffffff;
 }

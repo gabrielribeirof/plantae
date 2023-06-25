@@ -75,7 +75,7 @@ public class Plant implements Serializable {
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
-        this.watered = false;
+//        this.watered = false;
     }
 
     /**
