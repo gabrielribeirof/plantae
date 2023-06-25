@@ -83,6 +83,147 @@ public class PlantController implements PlantServices {
         return "error";
     }
 
+    @GetMapping("/sunday")
+    public ModelAndView getSunday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[0]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @GetMapping("/monday")
+    public ModelAndView getMonday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[1]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @GetMapping("/tuesday")
+    public ModelAndView getTuesday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[2]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @GetMapping("/wednesday")
+    public ModelAndView getWednesday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[3]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @GetMapping("/thursday")
+    public ModelAndView getThursday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[4]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @GetMapping("/friday")
+    public ModelAndView getFriday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[5]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @GetMapping("/saturday")
+    public ModelAndView getSaturday(Model model) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[6]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    @PostMapping("water/{id}")
+    public String waterPlant(@PathVariable int id) {
+        Plant plant = plantRepository.findById(id).get();
+        plant.setWatered(true);
+        plantRepository.save(plant);
+        return "redirect:/plants/cadastro-plantas";
+    }
+
     /**
      *
      * @param id

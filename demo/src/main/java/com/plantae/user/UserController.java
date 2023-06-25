@@ -62,11 +62,13 @@ public class UserController implements UserServices {
      * @param user
      * @return
      */
-    @PostMapping("cadastro")
+    @PostMapping("/cadastro")
     @Override
     public String newUser(@ModelAttribute User user) {
         BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
+        BCryptPasswordEncoder userencoder = new BCryptPasswordEncoder();
         user.setSenha(passwordencoder.encode(user.getPassword()));
+        user.setUsername(userencoder.encode(user.getUsername()));
         userRepository.save(user);
         return "login";
     }

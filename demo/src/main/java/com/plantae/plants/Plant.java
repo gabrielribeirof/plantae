@@ -50,6 +50,9 @@ public class Plant implements Serializable {
     @NotEmpty
     private User user;
 
+    @NotEmpty
+    private boolean watered;
+
     /**
      *
      */
@@ -65,13 +68,14 @@ public class Plant implements Serializable {
      * @param sun
      * @param daysToWater
      */
-    public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater) {
+    public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater, boolean watered) {
         this.id = id;
         this.especie = especie;
         this.category = category;
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
+        this.watered = false;
     }
 
     /**
@@ -185,4 +189,13 @@ public class Plant implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public boolean isWatered() {
+        return watered;
+    }
+
+    public void setWatered(boolean watered) {
+        this.watered = watered;
+    }
+
 }

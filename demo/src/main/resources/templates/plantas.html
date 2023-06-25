@@ -16,7 +16,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
           <h2>Bem vindo, <span th:text="${#authentication.principal.nome}"/>!</h2>
       </div>
       <div class="container">
-        <h2>Home</h2>
+        <a th:href="@{/plants/cadastro-plantas}"><h2>Home</h2></a>
+        
       </div>
       <div class="container">
         <button>
@@ -27,13 +28,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       </div>
     </header>
     <div class="week">
-      <button class="week-btn">Dom</button>
-      <button class="week-btn">Seg</button>
-      <button class="week-btn">Ter</button>
-      <button class="week-btn">Qua</button>
-      <button class="week-btn">Qui</button>
-      <button class="week-btn">Sex</button>
-      <button class="week-btn">Sab</button>
+      <form th:action="@{/plants/sunday}">
+        <button class="week-btn">Dom</button>
+      </form>   
+
+      <form th:action="@{/plants/monday}">
+        <button class="week-btn">Seg</button>
+      </form>   
+     
+      <form th:action="@{/plants/tuesday}">
+        <button class="week-btn">Ter</button>
+      </form>
+      
+      <form th:action="@{/plants/wednesday}">
+        <button class="week-btn">Qua</button>
+      </form>
+      
+      <form th:action="@{/plants/thursday}">
+        <button class="week-btn">Qui</button>
+      </form>
+      
+      <form th:action="@{/plants/friday}">
+        <button class="week-btn">Sex</button>
+      </form>
+
+      <form th:action="@{/plants/saturday}">
+        <button class="week-btn">Sab</button>
+      </form>
+      
     </div>
     <div class="content">
       <div class="cards-container">
@@ -81,6 +103,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
               <p><span th:text="${evento.category}"></span></p>
             </div>
           </div>
+          <div class="checkbox-container">
+            <div>
+            <span th:text="${evento.watered} ? 'Regado' : 'Não regado'"></span>
+            </div>
+            <form action="#" th:action="@{'water/'+${evento.id}}" th:method="post">
+            <button th:unless="${evento.watered}" type="submit">Regar</button>
+            </form>
+          </div>
           <div class="plant-management">
             <!-- Modification -->
             <form action="#" >
@@ -98,9 +128,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </button>        
           </form>
  
-          <div class="checkbox-container">
-            <input class="checkbox" name="watering" type="checkbox" />
-          </div>
+          
         </div>        
         </div>
     </div>
