@@ -82,6 +82,12 @@ public class PlantController implements PlantServices {
         return "error";
     }
 
+    /**
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping("/modify/{id}")
     public ModelAndView modifyPlants(Model model, @PathVariable int id) {
         ModelAndView mv = new ModelAndView("modification");
@@ -91,6 +97,12 @@ public class PlantController implements PlantServices {
         return mv;
     }
 
+    /**
+     *
+     * @param plant
+     * @param id
+     * @return
+     */
     @PostMapping("/modify/{id}")
     public String modifiyPlantsPost(@ModelAttribute Plant plant, @PathVariable int id) {
         Plant planta = plantRepository.findById(id).get();
@@ -110,6 +122,11 @@ public class PlantController implements PlantServices {
         return "redirect:/plants/cadastro-plantas";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/sunday")
     public ModelAndView getSunday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -129,6 +146,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/monday")
     public ModelAndView getMonday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -148,6 +170,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/tuesday")
     public ModelAndView getTuesday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -167,6 +194,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/wednesday")
     public ModelAndView getWednesday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -186,6 +218,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/thursday")
     public ModelAndView getThursday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -205,6 +242,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/friday")
     public ModelAndView getFriday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -224,6 +266,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/saturday")
     public ModelAndView getSaturday(Model model) {
         ModelAndView modelAndView = new ModelAndView("plantas");
@@ -243,6 +290,11 @@ public class PlantController implements PlantServices {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @PostMapping("water/{id}")
     public String waterPlant(@PathVariable int id) {
         Plant plant = plantRepository.findById(id).get();
@@ -251,6 +303,11 @@ public class PlantController implements PlantServices {
         return "redirect:/plants/cadastro-plantas";
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @PostMapping("not-watered/{id}")
     public String notWateredPlant(@PathVariable int id) {
         Plant plant = plantRepository.findById(id).get();
@@ -418,7 +475,6 @@ public class PlantController implements PlantServices {
     /**
      *
      * @param day
-     * @param userid
      * @return
      */
     @GetMapping("/reports/{day}")

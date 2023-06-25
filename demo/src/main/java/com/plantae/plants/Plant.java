@@ -75,6 +75,7 @@ public class Plant implements Serializable {
      * @param water
      * @param sun
      * @param daysToWater
+     * @param watered
      */
     public Plant(int id, String especie, String category, int water, int sun, boolean[] daysToWater, boolean watered) {
         this.id = id;
@@ -198,10 +199,18 @@ public class Plant implements Serializable {
         this.user = user;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isWatered() {
         return watered;
     }
 
+    /**
+     *
+     * @param watered
+     */
     public void setWatered(boolean watered) {
         this.watered = watered;
     }
