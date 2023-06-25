@@ -123,6 +123,7 @@ public class PlantController implements PlantServices {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
         for (Plant plant : plants) {
+            if(plant.getUser().getId() != userid) continue;
             boolean[] daysToWater = plant.getDaysToWater();
             boolean plantWatered = false;
             for (boolean watered : daysToWater) {
@@ -148,7 +149,7 @@ public class PlantController implements PlantServices {
      */
     @GetMapping("/{userid}/reports/week/less-watered")
     @Override
-    public ModelAndView lessWateredOfWeek() {
+    public ModelAndView lessWateredOfWeek(@PathVariable int userid) {
         ModelAndView mv = new ModelAndView("plantas");
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
@@ -157,6 +158,7 @@ public class PlantController implements PlantServices {
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
 
         for (Plant plant : plants) {
+            if(plant.getUser().getId() != userid) continue;
             int total = 0;
             boolean[] daysToWater = plant.getDaysToWater();
             for (boolean watered : daysToWater) {
@@ -180,7 +182,7 @@ public class PlantController implements PlantServices {
      */
     @GetMapping("/{userid}/reports/week/most-watered")
     @Override
-    public ModelAndView mostWateredOfWeek() {
+    public ModelAndView mostWateredOfWeek(@PathVariable int userid) {
         ModelAndView mv = new ModelAndView("plantas");
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
@@ -189,6 +191,7 @@ public class PlantController implements PlantServices {
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
 
         for (Plant plant : plants) {
+            if(plant.getUser().getId() != userid) continue;
             int total = 0;
             boolean[] daysToWater = plant.getDaysToWater();
             for (boolean watered : daysToWater) {
@@ -223,6 +226,7 @@ public class PlantController implements PlantServices {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
         for (Plant plant : plants) {
+            if(plant.getUser().getId() != userid) continue;
             if (plant.getDaysToWater()[day] == true) {
                 total++;
             }
@@ -249,6 +253,7 @@ public class PlantController implements PlantServices {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
         for (Plant plant : plants) {
+            if(plant.getUser().getId() != userid) continue;
             if (plant.getDaysToWater()[day] == false) {
                 total++;
             }

@@ -54,15 +54,17 @@ public interface PlantServices {
 
     /**
      *
+     * @param userid
      * @return
      */
-    public ModelAndView lessWateredOfWeek();
+    public ModelAndView lessWateredOfWeek(@PathVariable int userid);
 
     /**
      *
+     * @param userid
      * @return
      */
-    public ModelAndView mostWateredOfWeek();
+    public ModelAndView mostWateredOfWeek(@PathVariable int userid);
 
     /**
      *
