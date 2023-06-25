@@ -1,7 +1,5 @@
 package com.plantae.plants;
 
-import java.util.List;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,41 +42,5 @@ public interface PlantServices {
      * @return
      */
     public String deletePlant(@PathVariable int id);
-    
-    /**
-     *
-     * @param userid
-     * @return
-     */
-    public ModelAndView totalOfWeek(@PathVariable int userid);
 
-    /**
-     *
-     * @param userid
-     * @return
-     */
-    public ModelAndView lessWateredOfWeek(@PathVariable int userid);
-
-    /**
-     *
-     * @param userid
-     * @return
-     */
-    public ModelAndView mostWateredOfWeek(@PathVariable int userid);
-
-    /**
-     *
-     * @param day
-     * @param userid
-     * @return
-     */
-    public ModelAndView wateredOfDay(@PathVariable int day, @PathVariable int userid);
-
-    /**
-     *
-     * @param day
-     * @param userid
-     * @return
-     */
-    public ModelAndView notWateredOfDay(@PathVariable int day, @PathVariable int userid);
 }

@@ -93,7 +93,7 @@ public class PlantController implements PlantServices {
         plantRepository.save(newPlant);
         return "redirect:/cadastro-plantas";
     }
-    
+
     /**
      *
      * @param id
@@ -112,18 +112,14 @@ public class PlantController implements PlantServices {
      * @param userid
      * @return
      */
-    @GetMapping("/{userid}/reports/week/total-watered")
-    @Override
-    public ModelAndView totalOfWeek(@PathVariable int userid) {
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
+    public int totalWateredOfWeek(int userid) {
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
         for (Plant plant : plants) {
-            if(plant.getUser().getId() != userid) continue;
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
             boolean[] daysToWater = plant.getDaysToWater();
             boolean plantWatered = false;
             for (boolean watered : daysToWater) {
@@ -137,28 +133,53 @@ public class PlantController implements PlantServices {
                 break;
             }
         }
-        
-        mv.addObject("total", total);
-        
-        return mv;
+
+        return total;
+    }
+    
+    /**
+     *
+     * @param userid
+     * @return
+     */
+    public int totalNotWateredOfWeek(int userid) {
+        int total = 0;
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+
+        for (Plant plant : plants) {
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
+            boolean[] daysToWater = plant.getDaysToWater();
+            boolean plantNotWatered = false;
+            for (boolean watered : daysToWater) {
+                if (watered == false) {
+                    total++;
+                    plantNotWatered = true;
+                    break;
+                }
+            }
+            if (plantNotWatered) {
+                break;
+            }
+        }
+
+        return total;
     }
 
     /**
      *
+     * @param userid
      * @return
      */
-    @GetMapping("/{userid}/reports/week/less-watered")
-    @Override
-    public ModelAndView lessWateredOfWeek(@PathVariable int userid) {
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
+    public Plant lessWateredOfWeek(int userid) {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
 
         for (Plant plant : plants) {
-            if(plant.getUser().getId() != userid) continue;
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
             int total = 0;
             boolean[] daysToWater = plant.getDaysToWater();
             for (boolean watered : daysToWater) {
@@ -171,27 +192,23 @@ public class PlantController implements PlantServices {
 
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-        
-        mv.addObject("plant", countWateredPlants.get(keys.get(0)));
-        return mv;
+
+        return countWateredPlants.get(keys.get(0));
     }
 
     /**
      *
+     * @param userid
      * @return
      */
-    @GetMapping("/{userid}/reports/week/most-watered")
-    @Override
-    public ModelAndView mostWateredOfWeek(@PathVariable int userid) {
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
-       Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+    public Plant mostWateredOfWeek(int userid) {
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
 
         for (Plant plant : plants) {
-            if(plant.getUser().getId() != userid) continue;
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
             int total = 0;
             boolean[] daysToWater = plant.getDaysToWater();
             for (boolean watered : daysToWater) {
@@ -204,9 +221,8 @@ public class PlantController implements PlantServices {
 
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-        
-        mv.addObject("plant", countWateredPlants.get(keys.get(keys.size())));
-        return mv;
+
+        return countWateredPlants.get(keys.get(keys.size()));
     }
 
     /**
@@ -215,25 +231,20 @@ public class PlantController implements PlantServices {
      * @param userid
      * @return
      */
-    @GetMapping("/{userid}/reports/{day}/total-watered")
-    @Override
-    public ModelAndView wateredOfDay(@PathVariable int day, @PathVariable int userid) {
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
+    public int wateredOfDay(int day, int userid) {
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
         for (Plant plant : plants) {
-            if(plant.getUser().getId() != userid) continue;
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
             if (plant.getDaysToWater()[day] == true) {
                 total++;
             }
         }
-        
-        mv.addObject("total", total);
-        return mv;
+
+        return total;
     }
 
     /**
@@ -242,24 +253,120 @@ public class PlantController implements PlantServices {
      * @param userid
      * @return
      */
-    @GetMapping("/{userid}/reports/{day}/total-not-watered")
-    @Override
-    public ModelAndView notWateredOfDay(@PathVariable int day, @PathVariable int userid) {
-        ModelAndView mv = new ModelAndView("plantas");
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
+    public int notWateredOfDay(int day, int userid) {
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
         for (Plant plant : plants) {
-            if(plant.getUser().getId() != userid) continue;
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
             if (plant.getDaysToWater()[day] == false) {
                 total++;
             }
         }
-        
-        mv.addObject("total", total);
+
+        return total;
+    }
+    
+      /**
+     *
+     * @param userid
+     * @return
+     */
+    public int totalPlantsByUser(int userid) {
+        int total = 0;
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+
+        for (Plant plant : plants) {
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
+            total++;
+        }
+
+        return total;
+    }
+    
+          /**
+     *
+     * @param userid
+     * @return
+     */
+    public ArrayList<Plant> plantsByUser(int userid) {
+        ArrayList<Plant> plantsOfUser = new ArrayList<>();
+        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
+
+        for (Plant plant : plants) {
+            if (plant.getUser().getId() != userid) {
+                continue;
+            }
+            plantsOfUser.add(plant);
+        }
+
+        return plantsOfUser;
+    }
+    
+
+    /**
+     * Relatorio para as plantas de cada dia da semana
+     *
+     * @param day
+     * @return
+     */
+    @GetMapping("/reports/{day}")
+//    @Override
+    public ModelAndView report(@PathVariable int day) {
+        String dayOfWeek;
+        switch (day) {
+            case 0:
+                dayOfWeek = "domingo";
+                break;
+            case 1:
+                dayOfWeek = "segunda";
+                break;
+            case 2:
+                dayOfWeek = "terça";
+                break;
+            case 3:
+                dayOfWeek = "quarta";
+                break;
+            case 4:
+                dayOfWeek = "quinta";
+                break;
+            case 5:
+                dayOfWeek = "sexta";
+                break;
+            case 6:
+                dayOfWeek = "sábado";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        ModelAndView mv = new ModelAndView("relatorio");
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        int totalNotWatered = totalNotWateredOfWeek(user.getId());
+        int totalWatered = totalWateredOfWeek(user.getId());
+        int wateredPlantWeek = wateredOfDay(day, user.getId());
+        int notWateredPlantWeek = notWateredOfDay(day, user.getId());
+        int totalPlants = totalPlantsByUser(user.getId());
+         ArrayList<Plant> plantsWeek = plantsByUser(user.getId());
+         Plant lessWateredOfWeek = lessWateredOfWeek(user.getId());
+         Plant mostWateredOfWeek = mostWateredOfWeek(user.getId());
+
+        mv.addObject("plantsWeek", plantsWeek);
+        mv.addObject("totalPlants", totalPlants);
+        mv.addObject("user", user.getNome());
+        mv.addObject("dayOfWeek", dayOfWeek);
+        mv.addObject("totalNotWatered", totalNotWatered);
+        mv.addObject("totalWatered", totalWatered);
+        mv.addObject("wateredPlantWeek", wateredPlantWeek);
+        mv.addObject("notWateredPlantWeek", notWateredPlantWeek);
+        mv.addObject("lessWateredOfWeek", lessWateredOfWeek);
+        mv.addObject("mostWateredOfWeek", mostWateredOfWeek);
+
         return mv;
     }
 }
