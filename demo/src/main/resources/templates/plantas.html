@@ -24,31 +24,31 @@
       </div>
     </header>
     <div class="week">
-      <form th:action="@{/plants/sunday}">
+      <form th:action="@{/plants/0}">
         <button class="week-btn">Dom</button>
       </form>   
 
-      <form th:action="@{/plants/monday}">
+      <form th:action="@{/plants/1}">
         <button class="week-btn">Seg</button>
       </form>   
      
-      <form th:action="@{/plants/tuesday}">
+      <form th:action="@{/plants/2}">
         <button class="week-btn">Ter</button>
       </form>
       
-      <form th:action="@{/plants/wednesday}">
+      <form th:action="@{/plants/3}">
         <button class="week-btn">Qua</button>
       </form>
       
-      <form th:action="@{/plants/thursday}">
+      <form th:action="@{/plants/4}">
         <button class="week-btn">Qui</button>
       </form>
       
-      <form th:action="@{/plants/friday}">
+      <form th:action="@{/plants/5}">
         <button class="week-btn">Sex</button>
       </form>
 
-      <form th:action="@{/plants/saturday}">
+      <form th:action="@{/plants/6}">
         <button class="week-btn">Sab</button>
       </form>
 
@@ -102,10 +102,8 @@
               <p><span th:text="${plants.category}"></span></p>
             </div>
           </div>
-          <div class="checkbox-container">
-            <div>
+          <div class="checkbox-container">            
             <span th:text="${plants.watered} ? 'Regado' : 'Não regado'"></span>
-            </div>
             <form action="#" th:action="@{'/plants/water/'+${plants.id}}" th:method="post">
             <button th:unless="${plants.watered}" type="submit" class="checkbox"></button>
             </form>

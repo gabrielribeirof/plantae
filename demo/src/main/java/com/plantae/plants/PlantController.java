@@ -126,165 +126,15 @@ public class PlantController implements PlantServices {
      * @param model
      * @return
      */
-    @GetMapping("/sunday")
-    public ModelAndView getSunday(Model model) {
+    @GetMapping("/{day}")
+    public ModelAndView getSunday(Model model, @PathVariable int day) {
         ModelAndView modelAndView = new ModelAndView("plantas");
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         ArrayList<Plant> plantas = new ArrayList<>();
         for (Plant p : todasPlantas) {
             if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[0]) {
-                    plantas.add(p);
-                }
-            }
-        }
-        modelAndView.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
-        model.addAttribute("plant", new Plant());
-        return modelAndView;
-    }
-
-    /**
-     * Caminho para plantas de segunda feira
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/monday")
-    public ModelAndView getMonday(Model model) {
-        ModelAndView modelAndView = new ModelAndView("plantas");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        ArrayList<Plant> plantas = new ArrayList<>();
-        for (Plant p : todasPlantas) {
-            if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[1]) {
-                    plantas.add(p);
-                }
-            }
-        }
-        modelAndView.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
-        model.addAttribute("plant", new Plant());
-        return modelAndView;
-    }
-
-    /**
-     * Caminho para plantas de terca feira
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/tuesday")
-    public ModelAndView getTuesday(Model model) {
-        ModelAndView modelAndView = new ModelAndView("plantas");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        ArrayList<Plant> plantas = new ArrayList<>();
-        for (Plant p : todasPlantas) {
-            if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[2]) {
-                    plantas.add(p);
-                }
-            }
-        }
-        modelAndView.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
-        model.addAttribute("plant", new Plant());
-        return modelAndView;
-    }
-
-    /**
-     * Caminho para plantas de quarta feira
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/wednesday")
-    public ModelAndView getWednesday(Model model) {
-        ModelAndView modelAndView = new ModelAndView("plantas");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        ArrayList<Plant> plantas = new ArrayList<>();
-        for (Plant p : todasPlantas) {
-            if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[3]) {
-                    plantas.add(p);
-                }
-            }
-        }
-        modelAndView.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
-        model.addAttribute("plant", new Plant());
-        return modelAndView;
-    }
-
-    /**
-     * Caminho para plantas de quinta feira
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/thursday")
-    public ModelAndView getThursday(Model model) {
-        ModelAndView modelAndView = new ModelAndView("plantas");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        ArrayList<Plant> plantas = new ArrayList<>();
-        for (Plant p : todasPlantas) {
-            if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[4]) {
-                    plantas.add(p);
-                }
-            }
-        }
-        modelAndView.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
-        model.addAttribute("plant", new Plant());
-        return modelAndView;
-    }
-
-    /**
-     * Caminho para plantas de sexta feira
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/friday")
-    public ModelAndView getFriday(Model model) {
-        ModelAndView modelAndView = new ModelAndView("plantas");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        ArrayList<Plant> plantas = new ArrayList<>();
-        for (Plant p : todasPlantas) {
-            if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[5]) {
-                    plantas.add(p);
-                }
-            }
-        }
-        modelAndView.addObject("todas_plantas", plantas);
-//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
-        model.addAttribute("plant", new Plant());
-        return modelAndView;
-    }
-
-    /**
-     * Caminho para plantas de sabado
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/saturday")
-    public ModelAndView getSaturday(Model model) {
-        ModelAndView modelAndView = new ModelAndView("plantas");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Plant> todasPlantas = plantRepository.findAll();
-        ArrayList<Plant> plantas = new ArrayList<>();
-        for (Plant p : todasPlantas) {
-            if (p.getUser().getId().equals(user.getId())) {
-                if (p.getDaysToWater()[6]) {
+                if (p.getDaysToWater()[day]) {
                     plantas.add(p);
                 }
             }
@@ -370,7 +220,6 @@ public class PlantController implements PlantServices {
         mv.addObject("todas_plantas", todasPlantas);
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
-
         for (Plant plant : plants) {
             boolean[] daysToWater = plant.getDaysToWater();
             boolean plantWatered = false;
@@ -385,9 +234,7 @@ public class PlantController implements PlantServices {
                 break;
             }
         }
-
         mv.addObject("total", total);
-
         return mv;
     }
 
@@ -403,7 +250,6 @@ public class PlantController implements PlantServices {
         mv.addObject("todas_plantas", todasPlantas);
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
-
         for (Plant plant : plants) {
             int total = 0;
             boolean[] daysToWater = plant.getDaysToWater();
@@ -416,7 +262,6 @@ public class PlantController implements PlantServices {
         }
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-
         mv.addObject("plant", countWateredPlants.get(keys.get(0)));
         return mv;
     }
@@ -434,7 +279,6 @@ public class PlantController implements PlantServices {
 //        model.addAttribute("plant", new Plant());
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
-
         for (Plant plant : plants) {
             int total = 0;
             boolean[] daysToWater = plant.getDaysToWater();
@@ -445,10 +289,8 @@ public class PlantController implements PlantServices {
             }
             countWateredPlants.put(total, plant);
         }
-
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
-
         mv.addObject("plant", countWateredPlants.get(keys.get(keys.size())));
         return mv;
     }
@@ -465,7 +307,6 @@ public class PlantController implements PlantServices {
         ModelAndView mv = new ModelAndView("plantas");
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         mv.addObject("todas_plantas", todasPlantas);
-//        model.addAttribute("plant", new Plant());
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
 
