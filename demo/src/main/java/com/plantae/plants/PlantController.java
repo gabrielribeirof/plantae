@@ -110,10 +110,11 @@ public class PlantController implements PlantServices {
         planta.setEspecie(plant.getEspecie());
         planta.setDaysToWater(plant.getDaysToWater());
         planta.setSun(plant.getSun());
+        planta.setWater(plant.getWater());
         if (user != null) {
             planta.setUser(user);
         }
-        planta.setWater(plant.getWater());
+        
         plantRepository.save(planta);
         return "redirect:/plants/cadastro-plantas";
     }
@@ -155,9 +156,9 @@ public class PlantController implements PlantServices {
     @PostMapping("water/{id}/{day}")
     public String waterPlant(@PathVariable int id, @PathVariable int day) {
         Plant plant = plantRepository.findById(id).get();
-        boolean[] newDaysWater = plant.getDaysToWater();
-        newDaysWater[day] = true;
-        plant.setDaysToWater(newDaysWater);
+        boolean[] newDaysWatered = plant.getDaysWatered();
+        newDaysWatered[day] = true;
+        plant.setDaysWatered(newDaysWatered);
         plantRepository.save(plant);
         return "redirect:/plants/cadastro-plantas";
     }
@@ -172,9 +173,9 @@ public class PlantController implements PlantServices {
     @PostMapping("not-watered/{id}/{day}")
     public String notWateredPlant(@PathVariable int id, @PathVariable int day) {
         Plant plant = plantRepository.findById(id).get();
-        boolean[] newDaysWater = plant.getDaysToWater();
-        newDaysWater[day] = false;
-        plant.setDaysToWater(newDaysWater);
+       boolean[] newDaysWatered = plant.getDaysWatered();
+        newDaysWatered[day] = false;
+        plant.setDaysWatered(newDaysWatered);
         plantRepository.save(plant);
         return "redirect:/plants/cadastro-plantas";
     }

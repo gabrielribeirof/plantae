@@ -50,6 +50,10 @@ public class Plant implements Serializable {
     @NotEmpty
     private boolean[] daysToWater = new boolean[7];
 
+    @Column(updatable = true)
+    @NotEmpty
+    private boolean[] daysWatered = new boolean[7];
+
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
@@ -80,6 +84,10 @@ public class Plant implements Serializable {
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
+        
+        for(int i = 0; i < 7; i++){
+            this.daysWatered[i] = false;
+        }
     }
 
 //Getter e setter
@@ -194,5 +202,15 @@ public class Plant implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public boolean[] getDaysWatered() {
+        return daysWatered;
+    }
+
+    public void setDaysWatered(boolean[] daysWatered) {
+        this.daysWatered = daysWatered;
+    }
+    
+    
 
 }
