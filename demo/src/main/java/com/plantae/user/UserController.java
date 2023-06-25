@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author Karol
- */
 @Controller
 @RequestMapping("/")
 public class UserController implements UserServices {
@@ -32,6 +28,7 @@ public class UserController implements UserServices {
     UserRepository userRepository;
 
     /**
+     * Caminho para a pagina principal, redireciona para o cadastro
      *
      * @return
      */
@@ -43,11 +40,12 @@ public class UserController implements UserServices {
         if (username.equals("anonymousUser")) {
             return "login";
         } else {
-            return "redirect:/cadastro-plantas";
+            return "redirect:/plants/cadastro-plantas";
         }
     }
 
     /**
+     * Caminho para login
      *
      * @return
      */
@@ -58,11 +56,12 @@ public class UserController implements UserServices {
     }
 
     /**
+     * Post para cadastro
      *
      * @param user
      * @return
      */
-    @PostMapping("cadastro")
+    @PostMapping("/cadastro")
     @Override
     public String newUser(@ModelAttribute User user) {
         BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
@@ -70,8 +69,9 @@ public class UserController implements UserServices {
         userRepository.save(user);
         return "login";
     }
-    
-     /**
+
+    /**
+     * Caminho para cadastro
      *
      * @param model
      * @return
@@ -96,10 +96,8 @@ public class UserController implements UserServices {
         newUser.setNome(bodyUser.getNome());
         newUser.setSenha(bodyUser.getSenha());
         newUser.setUsername(bodyUser.getUsername());
-
         userRepository.deleteById(id);
         userRepository.save(newUser);
-        
         return "redirect:/cadastro-plantas";
     }
 

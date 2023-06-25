@@ -6,6 +6,7 @@ package com.plantae.plants;
 
 import com.plantae.user.User;
 import com.plantae.user.UserRepository;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,10 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Karol
- */
 @Controller
 @RequestMapping("/plants")
 public class PlantController implements PlantServices {
@@ -41,6 +38,7 @@ public class PlantController implements PlantServices {
     UserRepository userRepository;
 
     /**
+     * Caminho de cadastro de plantas
      *
      * @param model
      * @return
@@ -49,13 +47,21 @@ public class PlantController implements PlantServices {
     @Override
     public ModelAndView plantas(Model model) {
         ModelAndView mv = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Plant> todasPlantas = plantRepository.findAll();
-        mv.addObject("todas_plantas", todasPlantas);
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                plantas.add(p);
+            }
+        }
+        mv.addObject("todas_plantas", plantas);
         model.addAttribute("plant", new Plant());
         return mv;
     }
 
     /**
+     * Post de cadastro de plantas
      *
      * @param plant
      * @return
@@ -68,10 +74,103 @@ public class PlantController implements PlantServices {
         if (user != null) {
             plant.setUser(user);
             plantRepository.save(plant);
-            return "redirect:/cadastro-plantas";
+            return "redirect:/plants/cadastro-plantas";
         }
         // Handle user not found scenario
         return "error";
+    }
+
+    /**
+     * Caminho para modificacao de plantas
+     *
+     * @param model
+     * @param id
+     * @return
+     */
+    @GetMapping("/modify/{id}")
+    public ModelAndView modifyPlants(Model model, @PathVariable int id) {
+        ModelAndView mv = new ModelAndView("modification");
+        Plant plant = plantRepository.findById(id).get();
+        model.addAttribute("plant", plant);
+        model.addAttribute("id", id);
+        return mv;
+    }
+
+    /**
+     * Post de modificacao de plantas
+     *
+     * @param plant
+     * @param id
+     * @return
+     */
+    @PostMapping("/modify/{id}")
+    public String modifiyPlantsPost(@ModelAttribute Plant plant, @PathVariable int id) {
+        Plant planta = plantRepository.findById(id).get();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        planta.setCategory(plant.getCategory());
+        planta.setEspecie(plant.getEspecie());
+        planta.setDaysToWater(plant.getDaysToWater());
+        planta.setSun(plant.getSun());
+        if (user != null) {
+            planta.setUser(user);
+        }
+        planta.setWater(plant.getWater());
+        planta.setWatered(plant.isWatered());
+        plantRepository.save(planta);
+        return "redirect:/plants/cadastro-plantas";
+    }
+
+    /**
+     * Caminho para plantas de domingo
+     *
+     * @param model
+     * @return
+     */
+    @GetMapping("/{day}")
+    public ModelAndView getSunday(Model model, @PathVariable int day) {
+        ModelAndView modelAndView = new ModelAndView("plantas");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Plant> todasPlantas = plantRepository.findAll();
+        ArrayList<Plant> plantas = new ArrayList<>();
+        for (Plant p : todasPlantas) {
+            if (p.getUser().getId().equals(user.getId())) {
+                if (p.getDaysToWater()[day]) {
+                    plantas.add(p);
+                }
+            }
+        }
+        modelAndView.addObject("todas_plantas", plantas);
+//      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
+        model.addAttribute("plant", new Plant());
+        return modelAndView;
+    }
+
+    /**
+     * Post para marcar a planta como regada
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping("water/{id}")
+    public String waterPlant(@PathVariable int id) {
+        Plant plant = plantRepository.findById(id).get();
+        plant.setWatered(true);
+        plantRepository.save(plant);
+        return "redirect:/plants/cadastro-plantas";
+    }
+
+    /**
+     * Post para marcar a planta como nao regada
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping("not-watered/{id}")
+    public String notWateredPlant(@PathVariable int id) {
+        Plant plant = plantRepository.findById(id).get();
+        plant.setWatered(false);
+        plantRepository.save(plant);
+        return "redirect:/plants/cadastro-plantas";
     }
 
     /**
@@ -91,19 +190,20 @@ public class PlantController implements PlantServices {
         newPlant.setSun(bodyPlant.getSun());
         newPlant.setWater(bodyPlant.getWater());
         plantRepository.save(newPlant);
-        return "redirect:/cadastro-plantas";
+        return "redirect:/plants/cadastro-plantas";
     }
 
     /**
+     * Post para deletar a planta
      *
      * @param id
      * @return
      */
-    @DeleteMapping("plants/{id}")
+    @DeleteMapping("/{id}")
     @Override
     public String deletePlant(@PathVariable int id) {
         plantRepository.deleteById(id);
-        return "redirect:/cadastro-plantas";
+        return "redirect:/plants/cadastro-plantas";
     }
 
     // REPORTS *****************************************************************
@@ -115,7 +215,7 @@ public class PlantController implements PlantServices {
     public int totalWateredOfWeek(int userid) {
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
-
+        
         for (Plant plant : plants) {
             if (plant.getUser().getId() != userid) {
                 continue;
@@ -175,7 +275,7 @@ public class PlantController implements PlantServices {
     public Plant lessWateredOfWeek(int userid) {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
-
+        
         for (Plant plant : plants) {
             if (plant.getUser().getId() != userid) {
                 continue;
@@ -189,7 +289,6 @@ public class PlantController implements PlantServices {
             }
             countWateredPlants.put(total, plant);
         }
-
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
 
@@ -204,7 +303,7 @@ public class PlantController implements PlantServices {
     public Plant mostWateredOfWeek(int userid) {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
         HashMap<Integer, Plant> countWateredPlants = new HashMap<>();
-
+        
         for (Plant plant : plants) {
             if (plant.getUser().getId() != userid) {
                 continue;
@@ -218,7 +317,6 @@ public class PlantController implements PlantServices {
             }
             countWateredPlants.put(total, plant);
         }
-
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
 
@@ -234,7 +332,7 @@ public class PlantController implements PlantServices {
     public int wateredOfDay(int day, int userid) {
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
-
+        
         for (Plant plant : plants) {
             if (plant.getUser().getId() != userid) {
                 continue;
@@ -243,20 +341,18 @@ public class PlantController implements PlantServices {
                 total++;
             }
         }
-
         return total;
     }
 
     /**
+     * Relatorio para as plantas de cada dia da semana
      *
      * @param day
-     * @param userid
      * @return
      */
     public int notWateredOfDay(int day, int userid) {
         int total = 0;
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
-
         for (Plant plant : plants) {
             if (plant.getUser().getId() != userid) {
                 continue;
@@ -366,7 +462,6 @@ public class PlantController implements PlantServices {
         mv.addObject("notWateredPlantWeek", notWateredPlantWeek);
         mv.addObject("lessWateredOfWeek", lessWateredOfWeek);
         mv.addObject("mostWateredOfWeek", mostWateredOfWeek);
-
         return mv;
     }
 }

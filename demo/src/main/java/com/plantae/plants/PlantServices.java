@@ -42,5 +42,4 @@ public interface PlantServices {
      * @return
      */
     public String deletePlant(@PathVariable int id);
-
 }

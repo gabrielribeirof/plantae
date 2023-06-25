@@ -21,6 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     /**
+     * Configuracao de acesso das paginas
      *
      * @param http
      * @return
@@ -30,17 +31,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/cadastro", "/css/**").permitAll()
-                        .anyRequest().authenticated())
+                .requestMatchers("/", "/cadastro", "/css/**").permitAll()
+                .anyRequest().authenticated())
                 .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll())
+                .loginPage("/login")
+                .permitAll())
                 .logout((logout) -> logout.permitAll());
 
         return http.build();
     }
 
     /**
+     * Hashing da senha
      *
      * @return
      */

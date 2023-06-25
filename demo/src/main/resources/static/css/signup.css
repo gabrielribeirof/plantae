@@ -13,10 +13,11 @@ body {
   background: linear-gradient(-45deg, #a3f474, #a3f474e0, #a3f474ba, #a3f474e0);
 }
 .popup {
-  position: fixed;
+  position: absolute;
   top: 10%;
-  left: 42.5%;
-  width: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 15%;
   border-radius: 30px;
   background-color: #f37d72; /* Red background color */
   color: #fff; /* White text color */

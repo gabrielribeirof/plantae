@@ -32,10 +32,11 @@ public class User implements UserDetails, Serializable {
 
     @NotEmpty
     private String senha;
-    
+
     @NotEmpty
     private String username;
 
+//    Getters, setters e implementacao de interface
     /**
      *
      * @return
