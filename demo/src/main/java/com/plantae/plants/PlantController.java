@@ -6,7 +6,6 @@ package com.plantae.plants;
 
 import com.plantae.user.User;
 import com.plantae.user.UserRepository;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -115,15 +114,15 @@ public class PlantController implements PlantServices {
             planta.setUser(user);
         }
         planta.setWater(plant.getWater());
-        planta.setWatered(plant.isWatered());
         plantRepository.save(planta);
         return "redirect:/plants/cadastro-plantas";
     }
 
     /**
-     * Caminho para plantas de domingo
+     * Caminho para plantas de um dia da semana
      *
      * @param model
+     * @param day
      * @return
      */
     @GetMapping("/{day}")
@@ -132,6 +131,7 @@ public class PlantController implements PlantServices {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         ArrayList<Plant> plantas = new ArrayList<>();
+        
         for (Plant p : todasPlantas) {
             if (p.getUser().getId().equals(user.getId())) {
                 if (p.getDaysToWater()[day]) {
@@ -149,12 +149,15 @@ public class PlantController implements PlantServices {
      * Post para marcar a planta como regada
      *
      * @param id
+     * @param day
      * @return
      */
-    @PostMapping("water/{id}")
-    public String waterPlant(@PathVariable int id) {
+    @PostMapping("water/{id}/{day}")
+    public String waterPlant(@PathVariable int id, @PathVariable int day) {
         Plant plant = plantRepository.findById(id).get();
-        plant.setWatered(true);
+        boolean[] newDaysWater = plant.getDaysToWater();
+        newDaysWater[day] = true;
+        plant.setDaysToWater(newDaysWater);
         plantRepository.save(plant);
         return "redirect:/plants/cadastro-plantas";
     }
@@ -163,12 +166,15 @@ public class PlantController implements PlantServices {
      * Post para marcar a planta como nao regada
      *
      * @param id
+     * @param day
      * @return
      */
-    @PostMapping("not-watered/{id}")
-    public String notWateredPlant(@PathVariable int id) {
+    @PostMapping("not-watered/{id}/{day}")
+    public String notWateredPlant(@PathVariable int id, @PathVariable int day) {
         Plant plant = plantRepository.findById(id).get();
-        plant.setWatered(false);
+        boolean[] newDaysWater = plant.getDaysToWater();
+        newDaysWater[day] = false;
+        plant.setDaysToWater(newDaysWater);
         plantRepository.save(plant);
         return "redirect:/plants/cadastro-plantas";
     }
