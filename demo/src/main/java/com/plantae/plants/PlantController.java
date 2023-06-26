@@ -220,9 +220,10 @@ public class PlantController implements PlantServices {
 
     // REPORTS *****************************************************************
     /**
+     * Quantidade de plantas regadas na semana
      *
-     * @param userid
-     * @return
+     * @param userid Id do usuario
+     * @return Quantidade de plantas regadas na semana
      */
     public int totalWateredOfWeek(int userid) {
         int total = 0;
@@ -245,14 +246,14 @@ public class PlantController implements PlantServices {
                 break;
             }
         }
-
         return total;
     }
 
     /**
+     * Quantidade de plantas nao regadas na semana
      *
-     * @param userid
-     * @return
+     * @param userid Id do usuario
+     * @return Quantidade de plantas nao regadas
      */
     public int totalNotWateredOfWeek(int userid) {
         int total = plantsByUser(userid).size() - totalWateredOfWeek(userid);
@@ -260,9 +261,10 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * A planta menos regada na semana
      *
-     * @param userid
-     * @return
+     * @param userid Id do usuario
+     * @return A planta menos regada na semana
      */
     public Plant lessWateredOfWeek(int userid) {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
@@ -288,9 +290,10 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * A planta mais regada na semana
      *
-     * @param userid
-     * @return
+     * @param userid Id do usuario
+     * @return A planta mais regada na semana
      */
     public Plant mostWateredOfWeek(int userid) {
         Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
@@ -316,10 +319,11 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * A quantidade de plantas regadas no dia
      *
-     * @param day
-     * @param userid
-     * @return
+     * @param day Dia em inteiro
+     * @param userid Id do usuario
+     * @return A quantidade de plantas regadas no dia
      */
     public int wateredOfDay(int day, int userid) {
         int total = 0;
@@ -337,11 +341,11 @@ public class PlantController implements PlantServices {
     }
 
     /**
-     * Relatorio para as plantas de cada dia da semana
+     * Quantidade de plantas nao regadas no dia
      *
-     * @param day
-     * @param userid
-     * @return
+     * @param day Dia da semana em inteiro
+     * @param userid Id do usuario
+     * @return Quantidade de plantas nao regadas no dia
      */
     public int notWateredOfDay(int day, int userid) {
         int total = 0;
@@ -359,9 +363,10 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * A quantidade de plantas de um usuario
      *
-     * @param userid
-     * @return
+     * @param userid Id do usuario
+     * @return Quantidade de plantas em inteiro
      */
     public int totalPlantsByUser(int userid) {
         int total = 0;
@@ -378,9 +383,10 @@ public class PlantController implements PlantServices {
     }
 
     /**
+     * Retorna todas as plantas de um usuario
      *
-     * @param userid
-     * @return
+     * @param userid ID do usuario
+     * @return Um arraylist com as plantas do usuario
      */
     public ArrayList<Plant> plantsByUser(int userid) {
         ArrayList<Plant> plantsOfUser = new ArrayList<>();
@@ -399,8 +405,8 @@ public class PlantController implements PlantServices {
     /**
      * Relatorio para as plantas de cada dia da semana
      *
-     * @param day
-     * @return
+     * @param day Dia da semana em inteiro
+     * @return Retorna a pagina com os dias que foram regados
      */
     @GetMapping("/reports/{day}")
 //    @Override

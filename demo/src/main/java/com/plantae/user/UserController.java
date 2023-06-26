@@ -32,9 +32,9 @@ public class UserController implements UserServices {
     UserRepository userRepository;
 
     /**
-     * Caminho para a pagina principal, redireciona para o cadastro
+     * Caminho para a pagina principal
      *
-     * @return
+     * @return Redireciona para o cadastro
      */
     @GetMapping("")
     @Override
@@ -51,7 +51,7 @@ public class UserController implements UserServices {
     /**
      * Caminho para login
      *
-     * @return
+     * @return Redireciona para o login
      */
     @GetMapping("login")
     @Override
@@ -63,7 +63,7 @@ public class UserController implements UserServices {
      * Post para cadastro
      *
      * @param user
-     * @return
+     * @return Redireciona para o login
      */
     @PostMapping("/cadastro")
     @Override
@@ -78,7 +78,7 @@ public class UserController implements UserServices {
      * Caminho para cadastro
      *
      * @param model
-     * @return
+     * @return Redireciona para o cadastro
      */
     @GetMapping("/cadastro")
     public String cadastro(Model model) {
@@ -88,7 +88,7 @@ public class UserController implements UserServices {
 
     /**
      *
-     * @param id
+     * @param id Id do usuario
      * @param bodyUser
      * @return
      */
