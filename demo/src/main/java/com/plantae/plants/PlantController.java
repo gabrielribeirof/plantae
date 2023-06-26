@@ -42,7 +42,7 @@ public class PlantController implements PlantServices {
      * @param model
      * @return
      */
-    @GetMapping("/cadastro-plantas")
+    @GetMapping("/")
     @Override
     public ModelAndView plantas(Model model) {
         ModelAndView mv = new ModelAndView("plantas");
@@ -75,7 +75,7 @@ public class PlantController implements PlantServices {
         if (user != null) {
             plant.setUser(user);
             plantRepository.save(plant);
-            return "redirect:/plants/cadastro-plantas";
+            return "redirect:/plants/";
         }
         // Handle user not found scenario
         return "error";
@@ -118,7 +118,7 @@ public class PlantController implements PlantServices {
         }
         
         plantRepository.save(planta);
-        return "redirect:/plants/cadastro-plantas";
+        return "redirect:/plants/";
     }
 
     /**
@@ -203,7 +203,7 @@ public class PlantController implements PlantServices {
         newPlant.setSun(bodyPlant.getSun());
         newPlant.setWater(bodyPlant.getWater());
         plantRepository.save(newPlant);
-        return "redirect:/plants/cadastro-plantas";
+        return "redirect:/plants/";
     }
 
     /**
@@ -216,7 +216,7 @@ public class PlantController implements PlantServices {
     @Override
     public String deletePlant(@PathVariable int id) {
         plantRepository.deleteById(id);
-        return "redirect:/plants/cadastro-plantas";
+        return "redirect:/plants/";
     }
 
     // REPORTS *****************************************************************
@@ -233,9 +233,9 @@ public class PlantController implements PlantServices {
             if (plant.getUser().getId() != userid) {
                 continue;
             }
-            boolean[] daysToWater = plant.getDaysToWater();
+            boolean[] daysWatered = plant.getDaysWatered();
             boolean plantWatered = false;
-            for (boolean watered : daysToWater) {
+            for (boolean watered : daysWatered) {
                 if (watered == true) {
                     total++;
                     plantWatered = true;
@@ -256,27 +256,7 @@ public class PlantController implements PlantServices {
      * @return
      */
     public int totalNotWateredOfWeek(int userid) {
-        int total = 0;
-        Iterable<Plant> plants = (List<Plant>) plantRepository.findAll();
-
-        for (Plant plant : plants) {
-            if (plant.getUser().getId() != userid) {
-                continue;
-            }
-            boolean[] daysToWater = plant.getDaysToWater();
-            boolean plantNotWatered = false;
-            for (boolean watered : daysToWater) {
-                if (watered == false) {
-                    total++;
-                    plantNotWatered = true;
-                    break;
-                }
-            }
-            if (plantNotWatered) {
-                break;
-            }
-        }
-
+        int total = plantsByUser(userid).size() - totalWateredOfWeek(userid);
         return total;
     }
 
@@ -294,8 +274,8 @@ public class PlantController implements PlantServices {
                 continue;
             }
             int total = 0;
-            boolean[] daysToWater = plant.getDaysToWater();
-            for (boolean watered : daysToWater) {
+            boolean[] daysWatered = plant.getDaysWatered();
+            for (boolean watered : daysWatered) {
                 if (watered == true) {
                     total++;
                 }
@@ -322,8 +302,8 @@ public class PlantController implements PlantServices {
                 continue;
             }
             int total = 0;
-            boolean[] daysToWater = plant.getDaysToWater();
-            for (boolean watered : daysToWater) {
+            boolean[] dayswatered = plant.getDaysWatered();
+            for (boolean watered : dayswatered) {
                 if (watered == true) {
                     total++;
                 }
@@ -350,7 +330,7 @@ public class PlantController implements PlantServices {
             if (plant.getUser().getId() != userid) {
                 continue;
             }
-            if (plant.getDaysToWater()[day] == true) {
+            if (plant.getDaysWatered()[day] == true) {
                 total++;
             }
         }
@@ -361,6 +341,7 @@ public class PlantController implements PlantServices {
      * Relatorio para as plantas de cada dia da semana
      *
      * @param day
+     * @param userid
      * @return
      */
     public int notWateredOfDay(int day, int userid) {
@@ -370,7 +351,7 @@ public class PlantController implements PlantServices {
             if (plant.getUser().getId() != userid) {
                 continue;
             }
-            if (plant.getDaysToWater()[day] == false) {
+            if (plant.getDaysWatered()[day] == false) {
                 total++;
             }
         }
@@ -426,6 +407,7 @@ public class PlantController implements PlantServices {
     @GetMapping("/reports/{day}")
 //    @Override
     public ModelAndView report(@PathVariable int day) {
+
         String dayOfWeek;
         switch (day) {
             case 0:
@@ -450,7 +432,8 @@ public class PlantController implements PlantServices {
                 dayOfWeek = "sábado";
                 break;
             default:
-                throw new AssertionError();
+                dayOfWeek = "domingo";
+                break;
         }
         ModelAndView mv = new ModelAndView("relatorio");
 
@@ -458,8 +441,8 @@ public class PlantController implements PlantServices {
 
         int totalNotWatered = totalNotWateredOfWeek(user.getId());
         int totalWatered = totalWateredOfWeek(user.getId());
-        int wateredPlantWeek = wateredOfDay(day, user.getId());
-        int notWateredPlantWeek = notWateredOfDay(day, user.getId());
+        int wateredOfDay = wateredOfDay(day, user.getId());
+        int notWateredOfDay = notWateredOfDay(day, user.getId());
         int totalPlants = totalPlantsByUser(user.getId());
          ArrayList<Plant> plantsWeek = plantsByUser(user.getId());
          Plant lessWateredOfWeek = lessWateredOfWeek(user.getId());
@@ -471,8 +454,8 @@ public class PlantController implements PlantServices {
         mv.addObject("dayOfWeek", dayOfWeek);
         mv.addObject("totalNotWatered", totalNotWatered);
         mv.addObject("totalWatered", totalWatered);
-        mv.addObject("wateredPlantWeek", wateredPlantWeek);
-        mv.addObject("notWateredPlantWeek", notWateredPlantWeek);
+        mv.addObject("wateredOfDay", wateredOfDay);
+        mv.addObject("notWateredOfDay", notWateredOfDay);
         mv.addObject("lessWateredOfWeek", lessWateredOfWeek);
         mv.addObject("mostWateredOfWeek", mostWateredOfWeek);
         return mv;

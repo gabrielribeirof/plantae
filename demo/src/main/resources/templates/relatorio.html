@@ -14,7 +14,7 @@
       <div class="container">
         <h2>Plantae</h2>
         <div>
-          <a th:href="@{/plants/cadastro-plantas}">Cadastro de plantas</a>
+          <a th:href="@{/plants/}">Home</a>
         </div>
       </div>
       <div class="container">
@@ -58,10 +58,9 @@
     <div class="content">
       <div class="cards-container">
         <div class="title">
-            <h2>Plantas regadas na semana: <span th:text="${dayOfWeek}"></span></h2>
-            <p>Foram regadas <span th:text="${wateredPlantWeek}"></span> plantas</p>
+            <h2>Plantas regadas em <span th:text="${dayOfWeek}"></span></h2>
         </div>
-        <div th:each="plantas : ${todas_plantas}" class="card">
+        <div th:each="plantas : ${plantsWeek}" class="card">
           <div class="card-separator">
             <div>
               <svg
@@ -111,32 +110,36 @@
     
     <div class="relatorios">
       <div class="relatorio-card">
-        <h3>Total de plantas regadas dessa semana: <span th:text="${wateredPlantWeek}"></span></h3>
+        <h3>Total de plantas regadas nessa semana <span class="reports-value" th:text="${totalWatered}"></span></h3>
     </div>
       <div class="relatorio-card">
-        <h3>Total de plantas não regadas dessa semana: <span th:text="${notWateredPlantWeek}"></span></h3>
+        <h3>Total de plantas não regadas nessa semana <span class="reports-value" th:text="${totalNotWatered}"></span></h3>
     </div>
         <div class="relatorio-card">
-            <h3>Total de plantas regadas na semana: <span th:text="${totalWatered}"></span></h3>
+            <h3>Total de plantas regadas em 
+                <span th:text="${dayOfWeek}"> </span>
+                <span class="reports-value" th:text="${wateredOfDay}"></span>
+            </h3>
         </div>
         <div class="relatorio-card">
-          <h3>Total de plantas não regadas na semana: <span th:text="${totalNotWatered}"></span></h3>
-      </div>
+            <h3>Total de plantas não regadas em 
+                <span th:text="${dayOfWeek}"> </span>
+                <span class="reports-value" th:text="${notWateredOfDay}"></span>
+            </h3>
+        </div>
+        <div class="relatorio-card">
+            <h3>Planta mais regada na semana
+                <span class="reports-value" th:text="${mostWateredOfWeek.especie}"></span>
+            </h3>
+        </div>
+        <div class="relatorio-card">
+            <h3>Planta menos regada na semana
+                <span class="reports-value" th:text="${mostWateredOfWeek.especie}"></span>
+            </h3>
+        </div>
       <div class="relatorio-card">
-        <h3>Total de plantas cadastradas: <span th:text="${totalPlants}"></span></h3>
+        <h3>Total de plantas cadastradas <span class="reports-value" th:text="${totalPlants}"></span></h3>
     </div>
-        <!-- <div class="relatorio-card">
-            <h3>Planta menos regada na semana: espécie</h3>
-        </div>
-        <div class="relatorio-card">
-            <h3>Relatório de crescimento: 12</h3>
-        </div>
-        <div class="relatorio-card">
-            <h3>Relatório de crescimento: 12</h3>
-        </div>
-        <div class="relatorio-card">
-            <h3>Relatório de crescimento: 12</h3>
-        </div> -->
     </div>
   </body>
 </html>

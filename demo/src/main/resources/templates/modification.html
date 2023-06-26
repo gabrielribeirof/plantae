@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/modification.css" />
     <title>Plantae</title>
 </head>
 <body>
@@ -23,30 +23,26 @@
           <div class="input">
             <input type="text" th:field="*{category}" class="type" />
           </div>
-          <div>
-            <label for="">Quantidade de regas por dia:</label>
+          <div class="range-container">
+            <label for="">Quantidade de água</label>
             <div>
-              <input type="radio" name="water" checked th:field="*{water}" th:value="1"><label for="">1</label>
-              <input type="radio" name="water" th:field="*{water}" th:value="2"><label for="">2</label>
-              <input type="radio" name="water" th:field="*{water}" th:value="3"><label for="">3</label>
+              <input class="input-range-water" type="range" name="water" min="1" max="3" th:value="1">
             </div>
           </div>
-          <div>
-            <label for="">Quantidade de sol por dia:</label>
+          <div class="range-container">
+            <label for="">Quantidade de sol</label>
             <div>
-              <input type="radio" name="sun" checked th:field="*{sun}" th:value="1"><label for="">1</label>
-              <input type="radio" name="sun" th:field="*{sun}" th:value="2"><label for="">2</label>
-              <input type="radio" name="sun" th:field="*{sun}" th:value="3"><label for="">3</label>
+              <input class="input-range-sun" type="range" name="sun" min="1" max="3" th:value="1">
             </div>
           </div>
           <div class="week-days">
-          <input type="checkbox" th:field="*{daysToWater[0]}"><label for="">D</label>
-          <input type="checkbox" th:field="*{daysToWater[1]}"><label for="">S</label>
-          <input type="checkbox" th:field="*{daysToWater[2]}"><label for="">T</label>
-          <input type="checkbox" th:field="*{daysToWater[3]}"><label for="">Q</label>
-          <input type="checkbox" th:field="*{daysToWater[4]}"><label for="">Q</label>
-          <input type="checkbox" th:field="*{daysToWater[5]}"><label for="">S</label>
-          <input type="checkbox" th:field="*{daysToWater[6]}"><label for="">S</label>
+            <input type="checkbox" th:field="*{daysToWater[0]}"><label for="">D</label>
+            <input type="checkbox" th:field="*{daysToWater[1]}"><label for="">S</label>
+            <input type="checkbox" th:field="*{daysToWater[2]}"><label for="">T</label>
+            <input type="checkbox" th:field="*{daysToWater[3]}"><label for="">Q</label>
+            <input type="checkbox" th:field="*{daysToWater[4]}"><label for="">Q</label>
+            <input type="checkbox" th:field="*{daysToWater[5]}"><label for="">S</label>
+            <input type="checkbox" th:field="*{daysToWater[6]}"><label for="">S</label>
           </div>
           <div class="btn">
             <button type="submit" value="Submit">Confirmar</button>
