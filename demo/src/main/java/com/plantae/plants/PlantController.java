@@ -411,7 +411,6 @@ public class PlantController implements PlantServices {
     @GetMapping("/reports/{day}")
 //    @Override
     public ModelAndView report(@PathVariable int day) {
-
         String dayOfWeek;
         switch (day) {
             case 0:
@@ -446,7 +445,12 @@ public class PlantController implements PlantServices {
         int wateredOfDay = wateredOfDay(day, user.getId());
         int notWateredOfDay = notWateredOfDay(day, user.getId());
         int totalPlants = totalPlantsByUser(user.getId());
-        ArrayList<Plant> plantsWeek = plantsByUser(user.getId());
+        ArrayList<Plant> plantsWeek = new ArrayList<>();
+        for (Plant plantsToday : plantsByUser(user.getId())) {
+            if (plantsToday.getDaysWatered()[day]) {
+                plantsWeek.add(plantsToday);
+            }
+        }
         Plant lessWateredOfWeek = lessWateredOfWeek(user.getId());
         Plant mostWateredOfWeek = mostWateredOfWeek(user.getId());
         mv.addObject("plantsWeek", plantsWeek);
