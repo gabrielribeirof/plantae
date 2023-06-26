@@ -9,18 +9,22 @@
 
 body {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: rgb(255, 255, 255);
 }
 
 header {  
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   background: #264837;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   padding: 1rem;
+  flex-wrap: wrap;
 }
 
 a{
@@ -40,22 +44,27 @@ a{
 }
 
 .week {
-  max-width: 1400px;
+  max-width: 100vw;
   margin: 0 auto;
   margin-bottom: 2rem;
   background: transparent;
   display: flex;
   align-items: center;
-  column-gap: 2rem;
+  gap: 2rem;
   padding: 2.5rem;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.week > form {
+    width: auto;
+}
+
 .week-days {
   display: flex;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   background: #f4f4f4;
-  margin-bottom: 20px;
+  margin-bottom: 4rem;
   padding: 0.5rem;
   justify-content: space-between;
   border-radius: 15px;
@@ -100,10 +109,9 @@ a{
 }
 
 .content {
-  max-width: 1300px;
-  margin: 0 auto;
+  margin: 0 2rem;
   margin-bottom: 2rem;
-  height: calc(100vh - 306px);
+  height: 700px;
   background: transparent;
   display: flex;
   justify-content: space-between;
@@ -121,7 +129,7 @@ a{
 }
 
 .cards-container {
-  width: 60%;
+  flex: 1;
   height: 100%;
   display: inline-block;
   flex-wrap: wrap;
@@ -165,7 +173,7 @@ a{
 }
 
 .reminder {
-  width: 40%;
+  flex: 1;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -177,6 +185,11 @@ a{
   border: 1px solid #d3d3d3;
   border-radius: 16px;
   box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+}
+
+.reminder > form {
+    display: flex;
+    flex-direction: column;
 }
 
 @media (max-width: 990px) {
@@ -242,6 +255,38 @@ form {
   position: absolute;
 }
 
+.checkbox-checked {
+  cursor: pointer;
+  appearance: none;
+  width: 45px;
+  height: 45px;
+  background-color: #3e7a44;
+  border: 3px solid #3e7a44;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  margin: 0 2rem 0 1rem;
+}
+
+.checkbox-checked:before {
+  content: "✓";
+  width: 110%;
+  height: 110%;
+  background-color: #3e7a44;
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .card:has(input:checked) {
   background: linear-gradient(to left, #94d85c 50%, #e8e8e8 50%) right;
   background-size: 200% 100%;
@@ -286,7 +331,7 @@ form {
 .register {
   align-self: auto;
   font-size: 1.5rem;
-  margin: 2.5rem;
+  margin: 1rem auto 4rem auto;
   color: #000000;
 }
 
@@ -317,4 +362,11 @@ form {
 label {
   font-size: 1.2rem;
   color: #72c28e;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }

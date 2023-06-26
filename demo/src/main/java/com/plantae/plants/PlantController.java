@@ -49,12 +49,14 @@ public class PlantController implements PlantServices {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Plant> todasPlantas = plantRepository.findAll();
         ArrayList<Plant> plantas = new ArrayList<>();
+        
         for (Plant p : todasPlantas) {
             if (p.getUser().getId().equals(user.getId())) {
                 plantas.add(p);
             }
         }
         mv.addObject("todas_plantas", plantas);
+        mv.addObject("day", -1);
         model.addAttribute("plant", new Plant());
         return mv;
     }
@@ -127,7 +129,7 @@ public class PlantController implements PlantServices {
      * @return
      */
     @GetMapping("/{day}")
-    public ModelAndView getSunday(Model model, @PathVariable int day) {
+    public ModelAndView getPlantOfDay(Model model, @PathVariable int day) {
         ModelAndView modelAndView = new ModelAndView("plantas");
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Plant> todasPlantas = plantRepository.findAll();
@@ -140,7 +142,9 @@ public class PlantController implements PlantServices {
                 }
             }
         }
-        modelAndView.addObject("todas_plantas", plantas);
+        modelAndView.addObject("todas_plantas", plantas);        
+        modelAndView.addObject("day", day);
+
 //      Adicionamos atributos de cadastro de plantas para o modelo para que em POST seja possivel recuperar os atributos de cadastro de planta
         model.addAttribute("plant", new Plant());
         return modelAndView;
@@ -156,11 +160,13 @@ public class PlantController implements PlantServices {
     @PostMapping("water/{id}/{day}")
     public String waterPlant(@PathVariable int id, @PathVariable int day) {
         Plant plant = plantRepository.findById(id).get();
+        
         boolean[] newDaysWatered = plant.getDaysWatered();
         newDaysWatered[day] = true;
         plant.setDaysWatered(newDaysWatered);
+        
         plantRepository.save(plant);
-        return "redirect:/plants/cadastro-plantas";
+        return "redirect:/plants/" + day;
     }
 
     /**
@@ -177,7 +183,7 @@ public class PlantController implements PlantServices {
         newDaysWatered[day] = false;
         plant.setDaysWatered(newDaysWatered);
         plantRepository.save(plant);
-        return "redirect:/plants/cadastro-plantas";
+        return "redirect:/plants/" + day;
     }
 
     /**
@@ -327,7 +333,7 @@ public class PlantController implements PlantServices {
         List<Integer> keys = new ArrayList<>(countWateredPlants.keySet());
         Collections.sort(keys);
 
-        return countWateredPlants.get(keys.get(keys.size()));
+        return countWateredPlants.get(keys.get(keys.size()-1));
     }
 
     /**
