@@ -13,20 +13,28 @@ body {
   background: rgb(255, 255, 255);
 }
 
-header {
+header {  
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   background: #264837;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   padding: 1rem;
+  flex-wrap: wrap;
+}
+
+a {
+  color: white;
 }
 
 .container {
   color: #ffffff;
+  text-align: center;
 }
-.container button, .sair {
+.container button,
+.sair {
   color: #ffffff;
   border: none;
   background: transparent;
@@ -36,28 +44,31 @@ header {
 }
 
 .week {
-  max-width: 1400px;
+  max-width: 100vw;
   margin: 0 auto;
   margin-bottom: 2rem;
   background: transparent;
   display: flex;
   align-items: center;
-  column-gap: 2rem;
+  gap: 2rem;
   padding: 2.5rem;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
+
 .week-days {
   display: flex;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   background: #f4f4f4;
-  margin-bottom: 20px;
+  margin-bottom: 4rem;
   padding: 0.5rem;
   justify-content: space-between;
   border-radius: 15px;
 }
 
 .week-btn {
-  width: 10rem;
+  width: 8rem;
   background-color: #daf3e1;
   border: none;
   border-radius: 15px;
@@ -76,16 +87,15 @@ header {
 }
 
 .content {
-  max-width: 1300px;
-  margin: 0 auto;
+  margin: 0 1rem;
   margin-bottom: 2rem;
-  height: calc(100vh - 306px);
+  height: 58vh;
   background: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2.5rem;
-  column-gap: 2.5rem;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 @media (max-width: 990px) {
@@ -150,44 +160,49 @@ header {
 }
 
 @media (max-width: 990px) {
-  .cards-container, .relatorios {
+  .cards-container,
+  .relatorios {
     width: 100%;
   }
 }
 
-.relatorio{
-    width: 90%;
-    align-items: center;
+.relatorio {
+  width: 90%;
+  align-items: center;
 }
 
 .relatorio-card {
   height: 6rem;
 }
 
-.relatorio-card h3{
-    width: 30rem;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-}
-
-.relatorio-card:hover{
-    background-color: #a6ebad;
-    border-color: #2C854A;
-    transition: all 0.2s ease;
-}
-
-.title h2{
+.relatorio-card h3 {
+  width: 30rem;
+  font-size: 1rem;
+  cursor: pointer;
   text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #000000;
-    margin: 0.5rem 0rem 2rem 0rem;
 }
 
-.title p{
-    font-size: 1rem;
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 1rem;
+.relatorio-card:hover {
+  background-color: #a6ebad;
+  border-color: #2c854a;
+  transition: all 0.2s ease;
+}
+
+.title h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+  margin: 0.5rem 0rem 2rem 0rem;
+}
+
+.title p {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.reports-value {
+    color: #2c854a;
 }

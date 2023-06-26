@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Boas vindas</title>
+    <title>Plantae</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/relatorio.css" />
+    <link rel="stylesheet" href="/css/relatorio.css" />
   </head>
   <body>
     <header>
       <div class="container">
-        <h2>Bem vindo!!</h2>
+        <h2>Bem vindo, <span th:text="${user}"></span>!</h2>
       </div>
       <div class="container">
-        <h2>Home</h2>
+        <h2>Plantae</h2>
+        <div>
+          <a th:href="@{/plants/}">Home</a>
+        </div>
       </div>
       <div class="container">
         <button>
@@ -27,21 +26,41 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       </div>
     </header>
     <div class="week">
-      <button class="week-btn">Dom</button>
-      <button class="week-btn">Seg</button>
-      <button class="week-btn">Ter</button>
-      <button class="week-btn">Qua</button>
-      <button class="week-btn">Qui</button>
-      <button class="week-btn">Sex</button>
-      <button class="week-btn">Sab</button>
+      <form th:action="@{/plants/reports/0}">
+        <button class="week-btn">Dom</button>
+      </form>   
+
+      <form th:action="@{/plants/reports/1}">
+        <button class="week-btn">Seg</button>
+      </form>   
+     
+      <form th:action="@{/plants/reports/2}">
+        <button class="week-btn">Ter</button>
+      </form>
+      
+      <form th:action="@{/plants/reports/3}">
+        <button class="week-btn">Qua</button>
+      </form>
+      
+      <form th:action="@{/plants/reports/4}">
+        <button class="week-btn">Qui</button>
+      </form>
+      
+      <form th:action="@{/plants/reports/5}">
+        <button class="week-btn">Sex</button>
+      </form>
+
+      <form th:action="@{/plants/reports/6}">
+        <button class="week-btn">Sab</button>
+      </form>
+
     </div>
     <div class="content">
       <div class="cards-container">
         <div class="title">
-            <h2>Plantas regadas na semana.dia</h2>
-            <p>Foram regadas 3 plantas</p>
+            <h2>Plantas regadas em <span th:text="${dayOfWeek}"></span></h2>
         </div>
-        <div class="card">
+        <div th:each="plantas : ${plantsWeek}" class="card">
           <div class="card-separator">
             <div>
               <svg
@@ -81,29 +100,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
               </svg>
             </div>
             <div class="plant-data">
-              <h3>planta.nome</h3>
-              <p>Cannabis sativa</p>
+              <h3><span th:text="${plantas.especie}"></span></h3>
+              <p><span th:text="${plantas.category}"></span></p>
             </div>
           </div>     
         </div>
+        
     </div>
     
     <div class="relatorios">
+      <div class="relatorio-card">
+        <h3>Total de plantas regadas nessa semana <span class="reports-value" th:text="${totalWatered}"></span></h3>
+    </div>
+      <div class="relatorio-card">
+        <h3>Total de plantas não regadas nessa semana <span class="reports-value" th:text="${totalNotWatered}"></span></h3>
+    </div>
         <div class="relatorio-card">
-            <h3>Total de plantas regadas na semana: 12</h3>
+            <h3>Total de plantas regadas em 
+                <span th:text="${dayOfWeek}"> </span>
+                <span class="reports-value" th:text="${wateredOfDay}"></span>
+            </h3>
         </div>
         <div class="relatorio-card">
-            <h3>Planta menos regada na semana: espécie</h3>
+            <h3>Total de plantas não regadas em 
+                <span th:text="${dayOfWeek}"> </span>
+                <span class="reports-value" th:text="${notWateredOfDay}"></span>
+            </h3>
         </div>
         <div class="relatorio-card">
-            <h3>Relatório de crescimento: 12</h3>
+            <h3>Planta mais regada na semana
+                <span class="reports-value" th:text="${mostWateredOfWeek.especie}"></span>
+            </h3>
         </div>
         <div class="relatorio-card">
-            <h3>Relatório de crescimento: 12</h3>
+            <h3>Planta menos regada na semana
+                <span class="reports-value" th:text="${mostWateredOfWeek.especie}"></span>
+            </h3>
         </div>
-        <div class="relatorio-card">
-            <h3>Relatório de crescimento: 12</h3>
-        </div>
+      <div class="relatorio-card">
+        <h3>Total de plantas cadastradas <span class="reports-value" th:text="${totalPlants}"></span></h3>
+    </div>
     </div>
   </body>
 </html>

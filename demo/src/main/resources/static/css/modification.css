@@ -12,6 +12,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: rgb(255, 255, 255);
 }
 
@@ -109,42 +111,6 @@ a{
   transition: all 0.2s ease;
 }
 
-.content {
-  margin: 0 5rem;
-  margin-bottom: 2rem;
-  height: 700px;
-  background: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2.5rem;
-  column-gap: 2.5rem;
-}
-
-@media (max-width: 990px) {
-  .content {
-    margin: 0;
-    flex-direction: column;
-    row-gap: 40px;
-    height: 100%;
-  }
-}
-
-.cards-container {
-  flex: 2;
-  height: 100%;
-  display: inline-block;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 1rem;
-  margin: 0rem;
-  background-color: #fcfcfc;
-  border: 1px solid #d3d3d3;
-  border-radius: 16px;
-}
-
-.card,
 .reminder {
   position: relative;
   border-radius: 10px;
@@ -172,11 +138,10 @@ a{
   justify-content: space-between;
   align-items: center;
   align-self: self-end;
-  margin-right: auto;
 }
 
 .reminder {
-  flex: 1;
+  width: 50%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -195,7 +160,7 @@ a{
     flex-direction: column;
 }
 
-@media (max-width: 990px) {
+@media (max-width: 670px) {
   .cards-container, .reminder {
     width: 100%;
   }
@@ -203,8 +168,7 @@ a{
 
 .plant-management {
   display: flex;
-  flex-direction: row;
-  width: auto;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
 }

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author Karol
+ * @author Willian
  */
 @Controller
 @RequestMapping("/")
@@ -32,8 +32,9 @@ public class UserController implements UserServices {
     UserRepository userRepository;
 
     /**
+     * Caminho para a pagina principal
      *
-     * @return
+     * @return Redireciona para o cadastro
      */
     @GetMapping("")
     @Override
@@ -43,13 +44,14 @@ public class UserController implements UserServices {
         if (username.equals("anonymousUser")) {
             return "login";
         } else {
-            return "redirect:/plants/cadastro-plantas";
+            return "redirect:/plants/";
         }
     }
 
     /**
+     * Caminho para login
      *
-     * @return
+     * @return Redireciona para o login
      */
     @GetMapping("login")
     @Override
@@ -58,11 +60,12 @@ public class UserController implements UserServices {
     }
 
     /**
+     * Post para cadastro
      *
      * @param user
-     * @return
+     * @return Redireciona para o login
      */
-    @PostMapping("cadastro")
+    @PostMapping("/cadastro")
     @Override
     public String newUser(@ModelAttribute User user) {
         BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
@@ -72,9 +75,10 @@ public class UserController implements UserServices {
     }
 
     /**
+     * Caminho para cadastro
      *
      * @param model
-     * @return
+     * @return Redireciona para o cadastro
      */
     @GetMapping("/cadastro")
     public String cadastro(Model model) {
@@ -84,7 +88,7 @@ public class UserController implements UserServices {
 
     /**
      *
-     * @param id
+     * @param id Id do usuario
      * @param bodyUser
      * @return
      */
@@ -98,7 +102,7 @@ public class UserController implements UserServices {
         newUser.setUsername(bodyUser.getUsername());
         userRepository.deleteById(id);
         userRepository.save(newUser);
-        return "redirect:/cadastro-plantas";
+        return "redirect:/";
     }
 
     /**

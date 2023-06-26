@@ -23,6 +23,7 @@ body {
   color: #fff; /* White text color */
   text-align: center;
   padding: 10px;
+  z-index: 1000;
 }
 
 .popup-message {

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 public interface PlantRepository extends CrudRepository<Plant, Integer> {
 
     /**
+     * Achar alguma planta por ID
      *
      * @param id
      * @return
