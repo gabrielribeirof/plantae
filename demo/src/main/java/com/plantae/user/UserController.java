@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ *
+ * @author Willian
+ */
 @Controller
 @RequestMapping("/")
 public class UserController implements UserServices {

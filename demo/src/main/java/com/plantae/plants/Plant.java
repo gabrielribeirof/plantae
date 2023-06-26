@@ -54,7 +54,6 @@ public class Plant implements Serializable {
     @NotEmpty
     private boolean[] daysWatered = new boolean[7];
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @JsonIgnoreProperties("plant")
@@ -84,8 +83,8 @@ public class Plant implements Serializable {
         this.water = water;
         this.sun = sun;
         this.daysToWater = daysToWater;
-        
-        for(int i = 0; i < 7; i++){
+
+        for (int i = 0; i < 7; i++) {
             this.daysWatered[i] = false;
         }
     }
@@ -203,14 +202,20 @@ public class Plant implements Serializable {
         this.user = user;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean[] getDaysWatered() {
         return daysWatered;
     }
 
+    /**
+     *
+     * @param daysWatered
+     */
     public void setDaysWatered(boolean[] daysWatered) {
         this.daysWatered = daysWatered;
     }
-    
-    
 
 }
